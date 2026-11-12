@@ -127,8 +127,7 @@ def test_phone(browser, url):
         expect(photos).to_have_count(2)
         correct = photos.nth(i % 2)
         assert correct.get_attribute("data-value") == word
-        page.get_by_text("Teks untuk pendamping").click()
-        expect(page.locator("#companion strong")).to_have_text(f"Pilih {word}.")
+        expect(button(page, "Dengar Arahan")).to_be_enabled()
         assert photos.nth(0).bounding_box()["y"] < photos.nth(1).bounding_box()["y"]
         if i == 0:
             photos.nth(1).tap()
@@ -203,8 +202,8 @@ def test_audio_fixture(browser, root):
     target = fixture_root / "kata-harian"
     shutil.copytree(APP, target)
     source = target / "data.js"
-    source.write_text(source.read_text().replace("wordAudio: null,", "wordAudio: word === 'sudu' ? './assets/audio/fixture.mp3' : null,")
-                      .replace("promptAudio: null,", "promptAudio: word === 'sudu' ? './assets/audio/fixture.mp3' : null,"))
+    source.write_text(source.read_text().replace("wordAudio: `./assets/audio/${word}.mp3`,", "wordAudio: word === 'sudu' ? './assets/audio/fixture.mp3' : null,")
+                      .replace("promptAudio: `./assets/audio/pilih-${word}.mp3`,", "promptAudio: word === 'sudu' ? './assets/audio/fixture.mp3' : null,"))
     audio_file = target / "assets/audio/fixture.mp3"
     audio_file.parent.mkdir(exist_ok=True)
     subprocess.run(["ffmpeg", "-loglevel", "error", "-f", "lavfi", "-i", "sine=frequency=440:duration=2", str(audio_file)], check=True)

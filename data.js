@@ -33,8 +33,8 @@ export const cards = Object.fromEntries(Object.values(bank).flat(2).map(segments
   return [word, {
     word, syllables, distractors: [distractors[word]],
     image: `./assets/photos/${word}.webp`,
-    wordAudio: null,
-    promptAudio: null,
+    wordAudio: `./assets/audio/${word}.mp3`,
+    promptAudio: `./assets/audio/pilih-${word}.mp3`,
   }];
 }));
 export const mediaFiles = Object.values(cards).flatMap(card => [card.image, card.wordAudio, card.promptAudio].filter(Boolean));

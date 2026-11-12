@@ -2,10 +2,10 @@
 
 - **Logo KH** dibekalkan bersama projek. Versi skrin utama, favicon dan ikon menggunakan reka bentuk asal. Versi Android maskable mempunyai ruang tambahan di sekeliling tanda KH.
 - **30 gambar demo** dijana untuk projek ini, disemak mengikut kad, dan disimpan sebagai WebP. `beras.webp` menunjukkan beras mentah. Gambar demo tidak menggunakan foto stok pihak ketiga. Semak kebolehkenalan setiap gambar untuk rintis, khususnya lesung dan beras. Gantikan dengan foto sebenar yang telah diluluskan untuk pengedaran awam jika diperlukan.
-- **60 rakaman belum dibekalkan.** Rakam satu perkataan dan satu arahan “Pilih [perkataan].” bagi setiap kad, dalam bahasa Melayu Singapura yang natural. Dapatkan persetujuan penutur untuk pengedaran fail secara awam. Simpan dalam `assets/audio/`. Sementara menunggu rakaman, pendamping boleh membacakan jawapan atau membuka teks arahan.
-- Untuk media ganti, rekodkan pencipta, URL sumber, lesen dan sebarang suntingan. Media CC BY boleh digunakan tanpa bayaran apabila syarat atribusi dipenuhi. Gunakan juga media asli yang diluluskan untuk pengedaran awam atau CC0. Versi demo ini tidak memasukkan aset pihak ketiga yang memerlukan bayaran atau kebenaran berasingan.
+- **60 klip audio** dijana dengan suara bahasa Melayu Malaysia melalui akaun Narakeet berbayar. Setiap kad mempunyai satu sebutan dan satu arahan. Fail MP3 disimpan dalam `assets/audio/`. [Hak penggunaan Narakeet](https://www.narakeet.com/docs/usage-rights-copyright/)
+- Untuk media ganti, rekodkan pencipta, URL sumber, lesen dan sebarang suntingan. Media CC BY boleh digunakan tanpa bayaran apabila syarat atribusi dipenuhi. Gunakan juga media asli yang diluluskan untuk pengedaran awam atau CC0.
 
-| Tema dan pusingan | Kad | Imej demo tersedia | Rakaman jawapan diperlukan | Rakaman arahan diperlukan |
+| Tema dan pusingan | Kad | Imej demo tersedia | Rakaman jawapan | Rakaman arahan |
 |---|---|---|---|---|
 | Dapur 1 | sudu | `sudu.webp` | `sudu.mp3` | `pilih-sudu.mp3` |
 | Dapur 1 | garpu | `garpu.webp` | `garpu.mp3` | `pilih-garpu.mp3` |
