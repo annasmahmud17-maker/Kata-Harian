@@ -67,7 +67,7 @@ function stopAudio() {
 function home() {
   stopAudio();
   screen = 'home';
-  show(`<section class="hero">
+  show(`<div class="home-screen"><section class="hero">
     <img class="logo" src="./assets/icons/logo.webp" alt="Logo KH" width="180" height="180">
     ${heading('Kata Harian')}
     <p class="tagline">Bahan latihan perkataan harian</p>
@@ -76,7 +76,9 @@ function home() {
     <button class="activity-card" data-action="mode" data-value="name"><span><strong>Sebut Nama</strong><small>Lihat gambar dan cari perkataan.</small></span><span aria-hidden="true">›</span></button>
     <button class="activity-card" data-action="mode" data-value="choose"><span><strong>Pilih Gambar</strong><small>Dengar arahan dan pilih gambar.</small></span><span aria-hidden="true">›</span></button>
   </div>
-  <div id="install-area">${installed() ? '' : buttons('install', 'Pasang Aplikasi', 'quiet')}${!installed() ? '<div id="install-help" class="note" hidden></div>' : ''}</div>`);
+  <div id="install-area">${installed() ? '' : buttons('install', 'Pasang Aplikasi', 'quiet')}${!installed() ? '<div id="install-help" class="note" hidden></div>' : ''}</div>
+  <div class="home-credit"><span>Aplikasi oleh:</span><img src="./assets/icons/anak-bijak.webp" alt="Anak Bijak"></div>
+  </div>`);
 }
 
 function themes() {

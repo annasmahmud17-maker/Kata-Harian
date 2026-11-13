@@ -1,10 +1,10 @@
 import {mediaFiles} from './data.js';
 
 const prefix = `kata-harian:${self.registration.scope}:`;
-const cacheName = prefix + 'v5';
+const cacheName = prefix + 'v6';
 const shell = [
   './', './index.html', './style.css', './app.js', './data.js', './puzzle.js', './app.webmanifest',
-  './assets/icons/logo.webp', './assets/icons/kh-32.png', './assets/icons/kh-180.png',
+  './assets/icons/logo.webp', './assets/icons/anak-bijak.webp', './assets/icons/kh-32.png', './assets/icons/kh-180.png',
   './assets/icons/kh-192.png', './assets/icons/kh-512.png', './assets/icons/kh-maskable.png',
 ];
 const media = new Set(mediaFiles.map(path => new URL(path, self.registration.scope).href));
