@@ -22,13 +22,52 @@ let hint = false;
 let aid = false;
 let solved = false;
 let choices = [];
+let choiceCount = 2;
+let promptMode = 'listen';
+const seenGuides = new Set();
+let guideReturn;
 let choiceComplete = false;
 let chosen = '';
 let audio;
 let pointer;
 let cells = [];
 
-const activityNames = {name: 'Sebut Nama', choose: 'Pilih Gambar'};
+const activityNames = {name: 'Sebut Nama', choose: 'Pilih Gambar', words: 'Pilih Perkataan'};
+const instructions = {
+  name: [
+    ['Lihat gambar dan cuba sebut namanya.', 'Look at the picture and try to name it.'],
+    ['Tekan <strong>Jawapan</strong> untuk mendengar perkataan.', 'Tap <strong>Jawapan</strong> to hear the word.'],
+    ['Seret pada huruf, atau ketik huruf pertama dan terakhir. Tekan <strong>Langkau</strong> jika perlu.', 'Drag across the letters, or tap the first and last letters. Tap <strong>Langkau</strong> to skip.'],
+  ],
+  choose: [
+    ['Pilih <strong>Dengar</strong> atau <strong>Baca</strong>, kemudian pilih bilangan gambar.', 'Choose <strong>Dengar</strong> (listen) or <strong>Baca</strong> (read), then choose how many pictures to show.'],
+    ['Dengar atau baca perkataan. Tekan gambar yang sepadan.', 'Listen to or read the word. Tap the matching picture.'],
+  ],
+  words: [
+    ['Pilih bilangan pilihan. Dengar perkataan dalam bahasa Melayu.', 'Choose how many options to show. Listen to the Malay word.'],
+    ['Tekan perkataan yang sepadan. Tekan <strong>Dengar Semula</strong> jika perlu.', 'Tap the matching written word. Tap <strong>Dengar Semula</strong> to hear it again.'],
+  ],
+};
+const choiceLabels = {
+  name: ['Lihat gambar, sebut namanya dan cari perkataan.', 'Look at the picture, say its name and find the word.'],
+  choose: ['Dengar atau baca perkataan, kemudian pilih gambar.', 'Listen to or read the word, then choose the picture.'],
+  words: ['Dengar dan pilih perkataan yang sepadan.', 'Listen and choose the matching written word.'],
+};
+
+function guideSeen() {
+  try { return seenGuides.has(activity) || localStorage.getItem(`kh-guide-${activity}`) === 'seen'; }
+  catch { return seenGuides.has(activity); }
+}
+
+function guide(returnTo = themes) {
+  guideReturn = returnTo;
+  screen = 'guide';
+  show(`${heading('Cara Bermain / How to Play', activityNames[activity])}
+    <ol class="guide">${instructions[activity].map(([ms, en]) => `<li>${ms}<p lang="en">${en}</p></li>`).join('')}</ol>
+    <div class="guide-note"><p>Beri masa untuk mencuba. Anda boleh membantu jika diperlukan.</p>
+    <p lang="en">Give the player time to try. You can help if needed.</p></div>
+    <div class="actions">${buttons('start-mode', 'Mula / Start', 'primary')}</div>`);
+}
 const buttons = (action, text, kind = 'secondary', extra = '') =>
   `<button type="button" class="button ${kind}" data-action="${action}" ${extra}>${text}</button>`;
 
@@ -39,6 +78,7 @@ function heading(title, detail = '') {
 function show(markup) {
   pointer = null;
   cells = [];
+  app.dataset.screen = screen;
   app.innerHTML = markup;
   app.querySelectorAll('img[data-media]').forEach(img => {
     const fail = () => {
@@ -73,8 +113,7 @@ function home() {
     <p class="tagline">Bahan latihan perkataan harian</p>
   </section>
   <div class="activity-list">
-    <button class="activity-card" data-action="mode" data-value="name"><span><strong>Sebut Nama</strong><small>Lihat gambar dan cari perkataan.</small></span><span aria-hidden="true">›</span></button>
-    <button class="activity-card" data-action="mode" data-value="choose"><span><strong>Pilih Gambar</strong><small>Dengar arahan dan pilih gambar.</small></span><span aria-hidden="true">›</span></button>
+    ${Object.entries(activityNames).map(([key, title]) => `<button class="activity-card" data-action="mode" data-value="${key}"><span><strong>${title}</strong><small>${choiceLabels[key][0]}</small><small lang="en">${choiceLabels[key][1]}</small></span><span aria-hidden="true">›</span></button>`).join('')}
   </div>
   <div id="install-area">${installed() ? '' : buttons('install', 'Pasang Aplikasi', 'quiet')}${!installed() ? '<div id="install-help" class="note" hidden></div>' : ''}</div>`);
 }
@@ -90,6 +129,22 @@ function roundMenu() {
   show(`${heading('Pilih pusingan', `${activityNames[activity]} · ${theme}`)}
   <div class="menu">${rounds[theme].map((_, i) => buttons('round', `Pusingan ${i + 1} · 5 kad`, 'secondary', `data-value="${i}"`)).join('')}</div>
   ${buttons('themes', 'Tukar tema', 'quiet')}`);
+}
+
+function setup() {
+  screen = 'setup';
+  show(`${heading('Tetapan pusingan', activityNames[activity])}
+    <form id="round-settings" class="menu round-settings">
+      ${activity === 'choose' ? `<fieldset><legend>Arahan</legend>
+        <label><input type="radio" name="prompt" value="listen" ${promptMode === 'listen' ? 'checked' : ''}> Dengar</label>
+        <label><input type="radio" name="prompt" value="read" ${promptMode === 'read' ? 'checked' : ''}> Baca</label>
+      </fieldset>` : ''}
+      <fieldset><legend>${activity === 'choose' ? 'Bilangan gambar' : 'Bilangan pilihan'}</legend>
+        ${[2, 4, 6].map(count => `<label><input type="radio" name="count" value="${count}" ${count === choiceCount ? 'checked' : ''}> ${count}</label>`).join('')}
+      </fieldset>
+      <button type="submit" class="button primary">Mula pusingan</button>
+      ${buttons('guide', 'Cara Bermain / How to Play', 'quiet')}
+    </form>`);
 }
 
 function startRound() {
@@ -108,12 +163,17 @@ function startCard() {
   chosen = '';
   gridSize = card.word.length <= 5 ? selectedSize : 8;
   puzzle = null;
-  if (activity === 'choose') {
-    choices = [...card.distractors];
-    const offset = round % (choices.length + 1);
-    choices.splice((index + offset) % (choices.length + 1), 0, card.word);
+  if (activity === 'name') {
+    renderName();
+  } else {
+    const otherThemes = Object.entries(rounds).filter(([name]) => name !== theme).flatMap(([, sets]) => sets.flat());
+    const offset = (index * 3 + round) % otherThemes.length;
+    const pool = [...otherThemes.slice(offset), ...otherThemes.slice(0, offset)];
+    choices = pool.slice(0, choiceCount - 1);
+    choices.splice((index + round) % choiceCount, 0, card.word);
     renderChoice();
-  } else renderName();
+    if (activity === 'words' || promptMode === 'listen') actions['prompt-audio']();
+  }
 }
 
 function cardHeading(title) {
@@ -125,50 +185,69 @@ function answer() {
     <div class="answer-line"><span class="answer-word" role="img" aria-label="${card.word}">${card.syllables.map((part, i) =>
       `<span aria-hidden="true" class="${i % 2 === 0 ? 'red' : ''}">${part}</span>`).join('')}</span>
     ${buttons('word-audio', 'Dengar Jawapan', 'secondary', `aria-disabled="${!card.wordAudio}"`)}</div>
-    <p class="audio-status" id="audio-status" role="status">${card.wordAudio ? '' : 'Rakaman belum tersedia. Pendamping boleh menyebut jawapan.'}</p>
+    <p class="audio-status" id="answer-status" role="status">${card.wordAudio ? '' : 'Rakaman belum tersedia. Pendamping boleh menyebut jawapan.'}</p>
     ${buttons('next', 'Seterusnya', 'primary')}
   </div>`;
 }
 
 function renderName() {
   if (phase === 'photo') {
-    show(`${cardHeading('Apa ini?')}<figure class="picture intro-photo">${photo(card)}</figure>
-      <div class="actions">${buttons('puzzle', 'Cari Perkataan', 'primary')}</div>`);
+    show(`<section class="intro-layout"><figure class="picture intro-photo">${photo(card)}</figure>
+      <div>${cardHeading('Apa ini?')}<div class="actions">${buttons('puzzle', 'Jawapan', 'primary')}</div></div></section>`);
     return;
   }
 
   const fit = card.word.length <= 5;
-  const grid = puzzle ? `<div id="puzzle-tools"><p id="grid-help">Seret atau ketik huruf pertama dan terakhir. Papan kekunci: guna anak panah dan Enter.</p>
-    <div class="size-row" role="group" aria-label="Saiz petak">
-      ${[8, 5].map(size => buttons('size', `${size} × ${size}`, 'size', `data-value="${size}" aria-pressed="${gridSize === size}" ${size === 5 && !fit ? 'disabled aria-describedby="size-help"' : ''}`)).join('')}
-      ${fit ? '' : '<p id="size-help">Perkataan ini perlukan petak 8 × 8.</p>'}
-    </div></div>
-    <div class="grid" id="grid" role="group" aria-label="Petak huruf ${gridSize} darab ${gridSize}" aria-describedby="grid-help" style="--size:${gridSize}">
-      ${puzzle.letters.map((letter, i) => `<button type="button" class="cell" data-cell="${i}" tabindex="${i === 0 ? 0 : -1}" aria-label="${letter}, baris ${Math.floor(i / gridSize) + 1}, lajur ${i % gridSize + 1}" aria-pressed="false">${letter}</button>`).join('')}
-    </div>` : '';
   show(`${cardHeading('Cari perkataan')}<section class="name-layout">
-    <figure class="picture">${photo(card)}</figure>
-    <div class="practice">${grid}${answer()}
-      <p class="feedback" id="feedback" role="status"></p>
-      <div id="puzzle-actions" class="actions wrap">${buttons('hint', 'Petunjuk')}${buttons('aid', 'Tunjuk Perkataan')}${buttons('skip', 'Langkau', 'quiet')}</div>
+    <div class="puzzle-side">
+      <figure class="picture">${photo(card)}</figure>
+      <div id="puzzle-actions" class="actions wrap">
+        ${buttons('word-audio', 'Dengar Semula')}${buttons('puzzle-help', 'Petunjuk', 'secondary', 'aria-expanded="false" aria-controls="puzzle-tools"')}${buttons('skip', 'Langkau', 'quiet')}
+      </div>
+      <div id="puzzle-tools" hidden>
+        <p>Seret atau ketik huruf pertama dan terakhir. Papan kekunci: guna anak panah dan Enter.</p>
+        <div class="actions wrap">${buttons('hint', 'Tunjuk Huruf Pertama')}${buttons('aid', 'Tunjuk Perkataan')}</div>
+        <div class="size-row" role="group" aria-label="Saiz petak">
+          ${[8, 5].map(size => buttons('size', `${size} × ${size}`, 'size', `data-value="${size}" aria-pressed="${gridSize === size}" ${size === 5 && !fit ? 'disabled aria-describedby="size-help"' : ''}`)).join('')}
+          ${fit ? '' : '<p id="size-help">Perkataan ini perlukan petak 8 × 8.</p>'}
+        </div>
+      </div>
       <p id="aid" class="aid" hidden>${card.word}</p>
+      <p class="audio-status" id="audio-status" role="status"></p>
+      <p class="feedback" id="feedback" role="status"></p>
+    </div>
+    <div class="practice">
+      <div class="grid" id="grid" role="group" aria-label="Petak huruf ${gridSize} darab ${gridSize}" style="--size:${gridSize}">
+        ${puzzle.letters.map((letter, i) => `<button type="button" class="cell" data-cell="${i}" tabindex="${i === 0 ? 0 : -1}" aria-label="${letter}, baris ${Math.floor(i / gridSize) + 1}, lajur ${i % gridSize + 1}" aria-pressed="false">${letter}</button>`).join('')}
+      </div>
+      <div class="answer-space">${answer()}</div>
     </div>
   </section>`);
   cells = [...app.querySelectorAll('.cell')];
-  if (solved) reveal('Dengar dan sebut perkataan ini.');
 }
 
 function renderChoice() {
-  show(`${cardHeading('Pilih gambar')}
-    <div class="prompt">
-      ${buttons('prompt-audio', 'Dengar Arahan', 'primary', `aria-disabled="${!card.promptAudio}"`)}
-      <div id="companion" ${card.promptAudio ? 'hidden' : ''}><details><summary>Teks untuk pendamping</summary><p>Bacakan: <strong>Pilih ${card.word}.</strong></p></details></div>
-      <p class="audio-status" id="audio-status" role="status">${card.promptAudio ? '' : 'Rakaman belum tersedia.'}</p>
-    </div>
-    <div class="choices">${choices.map((word, i) => `<button type="button" class="photo-choice" data-action="pick" data-value="${word}" aria-label="Gambar ${i + 1}" aria-pressed="false">${photo(cards[word], '')}</button>`).join('')}</div>
-    <p id="feedback" class="feedback" role="status"></p>
-    <div class="actions"><div id="choice-next" hidden>${buttons('next', 'Seterusnya', 'primary')}</div>
-    <div id="choice-skip">${buttons('skip', 'Langkau', 'quiet')}</div></div>`);
+  const words = activity === 'words';
+  const read = !words && promptMode === 'read';
+  show(`${cardHeading(activityNames[activity])}
+    <section class="choice-layout">
+      <div class="prompt">
+        ${buttons('prompt-audio', read ? 'Dengar Perkataan' : 'Dengar Semula', 'primary')}
+        ${read ? `<p class="choice-target">${card.word}</p>` : buttons('choice-hint', words ? 'Tunjuk Gambar' : 'Tunjuk Perkataan', 'quiet', 'aria-expanded="false" aria-controls="choice-hint"')}
+        ${read ? '' : `<div id="choice-hint" hidden>${words ? photo(card) : `<p class="choice-target">${card.word}</p>`}</div>`}
+        <div id="companion" hidden><details><summary>Teks untuk pendamping</summary><p>Bacakan: <strong>${words || read ? card.word : `Pilih ${card.word}.`}</strong></p></details></div>
+        <p class="audio-status" id="audio-status" role="status"></p>
+      </div>
+      <div class="choice-body">
+        <div class="choices ${words ? 'word-options' : 'photo-options'}" data-count="${choiceCount}">${choices.map((word, i) =>
+          `<button type="button" class="choice ${words ? 'word-choice button' : 'photo-choice'}" data-action="pick" data-value="${word}" ${words ? '' : `aria-label="Gambar ${i + 1}"`} aria-pressed="false">${words ? word : photo(cards[word], '')}</button>`).join('')}</div>
+        <div class="choice-footer">
+          <p id="feedback" class="feedback" role="status"></p>
+          <div id="choice-next" hidden>${buttons('next', 'Seterusnya', 'primary')}</div>
+          <div id="choice-skip">${buttons('skip', 'Langkau', 'quiet')}</div>
+        </div>
+      </div>
+    </section>`);
 }
 
 function finish() {
@@ -201,16 +280,17 @@ function message(text) {
   document.querySelector('#feedback').textContent = text;
 }
 
-function reveal(text) {
+function reveal(text, found = true) {
+  stopAudio();
   solved = true;
-  mark(puzzle?.positions ?? []);
+  mark(found ? puzzle.positions : []);
   for (const cell of cells) cell.tabIndex = -1;
-  for (const id of ['puzzle-tools', 'puzzle-actions', 'aid']) {
+  for (const id of ['puzzle-tools', 'puzzle-actions', 'aid', 'audio-status']) {
     const el = document.getElementById(id);
     if (el) el.hidden = true;
   }
   document.querySelector('#answer').hidden = false;
-  const target = document.querySelector('[data-action="word-audio"]');
+  const target = document.querySelector('#answer [data-action="word-audio"]');
   target.focus({preventScroll: true});
   document.querySelector('#answer').scrollIntoView({block: 'nearest'});
   message(text);
@@ -244,26 +324,31 @@ function choose(word, skipped = false) {
   if (choiceComplete) return;
   chosen = word;
   choiceComplete = skipped || chosen === card.word;
-  for (const button of app.querySelectorAll('.photo-choice')) {
+  for (const button of app.querySelectorAll('.choice')) {
     const active = button.dataset.value === chosen;
     button.classList.toggle('picked', active);
     button.setAttribute('aria-pressed', String(active));
     if (choiceComplete && !button.disabled) button.setAttribute('aria-disabled', 'true');
   }
-  message(skipped ? 'Kad dilangkau.' : choiceComplete ? 'Pilihan tepat.' : 'Cuba gambar yang satu lagi.');
+  message(skipped ? 'Kad dilangkau.' : choiceComplete ? `Pilihan tepat. ${card.word}.` : 'Cuba lagi.');
   if (choiceComplete) {
     document.querySelector('#choice-skip').hidden = true;
     document.querySelector('#choice-next').hidden = false;
-    app.querySelector('[data-action="next"]').focus();
+    app.querySelector('[data-action="next"]').focus({preventScroll: true});
   }
 }
 
 function playAudio(url) {
-  if (!url) return;
+  const status = document.querySelector(solved ? '#answer-status' : '#audio-status');
+  if (!url) {
+    status.textContent = 'Rakaman belum tersedia.';
+    const companion = document.querySelector('#companion');
+    if (companion) companion.hidden = false;
+    return;
+  }
   stopAudio();
   const player = new Audio(url);
   audio = player;
-  const status = document.querySelector('#audio-status');
   status.textContent = '';
   player.play().catch(() => {
     if (audio !== player || !status.isConnected) return;
@@ -292,15 +377,34 @@ function install() {
 
 const actions = {
   home, themes, next, install,
-  mode(value) { activity = value; themes(); },
+  mode(value) {
+    activity = value;
+    choiceCount = 2;
+    promptMode = 'listen';
+    if (guideSeen()) themes();
+    else guide();
+  },
+  guide() { guide(screen === 'setup' ? setup : themes); },
+  'start-mode'() {
+    seenGuides.add(activity);
+    try { localStorage.setItem(`kh-guide-${activity}`, 'seen'); } catch {}
+    guideReturn();
+  },
   theme(value) { theme = value; roundMenu(); },
-  round(value) { round = Number(value); startRound(); },
+  round(value) { round = Number(value); if (activity === 'name') startRound(); else setup(); },
   replay: startRound,
-  'same-round'() { activity = 'choose'; startRound(); },
+  'same-round'() {
+    activity = 'choose';
+    choiceCount = 2;
+    promptMode = 'listen';
+    if (guideSeen()) setup();
+    else guide(setup);
+  },
   puzzle() {
     phase = 'puzzle';
     puzzle = makePuzzle(gridSize, card.word);
     renderName();
+    playAudio(card.wordAudio);
   },
   size(value) {
     const size = Number(value);
@@ -309,9 +413,20 @@ const actions = {
     first = null;
     puzzle = makePuzzle(size, card.word);
     renderName();
+    actions['puzzle-help']();
     if (hint) actions.hint();
     if (aid) actions.aid();
     app.querySelector(`[data-action="size"][data-value="${size}"]`).focus();
+  },
+  'puzzle-help'() {
+    const tools = document.getElementById('puzzle-tools');
+    tools.hidden = !tools.hidden;
+    app.querySelector('[data-action="puzzle-help"]').setAttribute('aria-expanded', String(!tools.hidden));
+  },
+  'choice-hint'() {
+    const target = document.getElementById('choice-hint');
+    target.hidden = !target.hidden;
+    app.querySelector('[data-action="choice-hint"]').setAttribute('aria-expanded', String(!target.hidden));
   },
   hint() {
     hint = true;
@@ -324,17 +439,28 @@ const actions = {
     message('Padankan huruf dengan perkataan yang ditunjukkan.');
   },
   skip() {
-    if (activity === 'choose') choose('', true);
-    else {
-      puzzle = null;
-      solved = true;
-      renderName();
-    }
+    if (activity === 'name') reveal('Dengar dan sebut perkataan ini.', false);
+    else choose('', true);
   },
   pick: choose,
   'word-audio'() { playAudio(card.wordAudio); },
-  'prompt-audio'() { playAudio(card.promptAudio); },
+  'prompt-audio'() { playAudio(activity === 'words' || promptMode === 'read' ? card.wordAudio : card.promptAudio); },
 };
+
+app.addEventListener('submit', event => {
+  if (event.target.id !== 'round-settings') return;
+  event.preventDefault();
+  const settings = new FormData(event.target);
+  choiceCount = Number(settings.get('count'));
+  promptMode = settings.get('prompt') || 'listen';
+  startRound();
+});
+
+matchMedia('(orientation: landscape)').addEventListener('change', () => {
+  if (!pointer) return;
+  pointer = null;
+  mark(first === null ? [] : [first]);
+});
 
 app.addEventListener('click', event => {
   const button = event.target.closest('button');

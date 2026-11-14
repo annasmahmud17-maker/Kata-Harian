@@ -29,10 +29,18 @@ def button(page, title):
     return page.get_by_role("button", name=title, exact=True)
 
 
-def enter(page, activity, theme="Dapur", round_number=1):
+def enter(page, activity, theme="Dapur", round_number=1, count=2, read=False):
     page.get_by_role("button", name=activity, exact=False).first.click()
+    if button(page, "Mula / Start").count():
+        expect(page.locator(".guide [lang=en]").first).to_be_visible()
+        button(page, "Mula / Start").click()
     button(page, theme).click()
     button(page, f"Pusingan {round_number} · 5 kad").click()
+    if activity != "Sebut Nama":
+        page.get_by_role("radio", name=str(count), exact=True).check()
+        if read:
+            page.get_by_role("radio", name="Baca", exact=True).check()
+        button(page, "Mula pusingan").click()
 
 
 def path(page, word):
@@ -71,13 +79,14 @@ def test_phone(browser, url):
     enter(page, "Sebut Nama")
     expect(page.get_by_role("heading", name="Apa ini?")).to_be_visible()
     for i, word in enumerate(("sudu", "garpu", "pisau", "cawan", "teko")):
-        button(page, "Cari Perkataan").click()
+        button(page, "Jawapan").click()
         expect(page.locator("#answer")).to_be_hidden()
         assert page.evaluate("document.documentElement.scrollWidth === innerWidth")
         assert page.locator(".picture").bounding_box()["y"] < page.locator("#grid").bounding_box()["y"]
         if i == 0:
             expect(page.locator(".cell")).to_have_count(64)
             button(page, "Petunjuk").click()
+            button(page, "Tunjuk Huruf Pertama").click()
             expect(page.locator(".cell.hint")).to_have_count(1)
             button(page, "Tunjuk Perkataan").click()
             expect(page.locator("#aid")).to_have_text(word)
@@ -115,6 +124,7 @@ def test_phone(browser, url):
             page.keyboard.press("Enter")
         else:
             if i == 3:
+                button(page, "Petunjuk").click()
                 expect(button(page, "5 × 5")).to_be_disabled()
                 expect(page.locator("#size-help")).to_be_visible()
             button(page, "Langkau").click()
@@ -122,22 +132,24 @@ def test_phone(browser, url):
         button(page, "Seterusnya").click()
     expect(page.get_by_role("heading", name="Pusingan selesai")).to_be_visible()
     button(page, "Cuba pusingan ini dalam Pilih Gambar").click()
+    button(page, "Mula / Start").click()
+    button(page, "Mula pusingan").click()
     for i, word in enumerate(("sudu", "garpu", "pisau", "cawan", "teko")):
         photos = page.locator(".photo-choice")
         expect(photos).to_have_count(2)
         correct = photos.nth(i % 2)
         assert correct.get_attribute("data-value") == word
-        expect(button(page, "Dengar Arahan")).to_be_enabled()
-        assert photos.nth(0).bounding_box()["y"] < photos.nth(1).bounding_box()["y"]
+        expect(button(page, "Dengar Semula")).to_be_enabled()
+        assert photos.nth(0).bounding_box()["x"] < photos.nth(1).bounding_box()["x"]
         if i == 0:
             photos.nth(1).tap()
-            expect(page.locator("#feedback")).to_have_text("Cuba gambar yang satu lagi.")
+            expect(page.locator("#feedback")).to_have_text("Cuba lagi.")
         if i == 2:
             button(page, "Langkau").click()
             expect(page.locator("#feedback")).to_have_text("Kad dilangkau.")
         else:
             correct.tap()
-            expect(page.locator("#feedback")).to_have_text("Pilihan tepat.")
+            expect(page.locator("#feedback")).to_have_text(f"Pilihan tepat. {word}.")
         expect(photos).to_have_count(2)
         button(page, "Seterusnya").click()
     expect(page.get_by_role("heading", name="Pusingan selesai")).to_be_visible()
@@ -179,7 +191,7 @@ def test_tablet(browser, url):
     page = browser.new_page(viewport={"width": 1024, "height": 768})
     page.goto(url)
     enter(page, "Sebut Nama", "Rumah", 2)
-    button(page, "Cari Perkataan").click()
+    button(page, "Jawapan").click()
     picture = page.locator(".picture").bounding_box()
     grid = page.locator("#grid").bounding_box()
     assert picture["x"] + picture["width"] < grid["x"]
@@ -194,6 +206,39 @@ def test_tablet(browser, url):
     page.set_viewport_size({"width": 768, "height": 1024})
     expect(page.get_by_role("img", name="langsir")).to_be_visible()
     assert page.locator(".picture").bounding_box()["y"] < page.locator("#grid").bounding_box()["y"]
+    page.close()
+
+
+def test_responsive_choices(browser, url):
+    page = browser.new_page(viewport={"width": 320, "height": 568})
+    page.goto(url)
+    for activity, selector in (("Pilih Gambar", ".photo-choice"), ("Pilih Perkataan", ".word-choice")):
+        for count in (2, 4, 6):
+            button(page, "Kata Harian, ke laman utama").click()
+            page.set_viewport_size({"width": 320, "height": 568})
+            enter(page, activity, count=count, read=activity == "Pilih Gambar" and count == 4)
+            options = page.locator(selector)
+            expect(options).to_have_count(count)
+            order = options.evaluate_all("items => items.map(item => item.dataset.value)")
+            assert len(set(order)) == count
+            if activity == "Pilih Perkataan":
+                assert len(set(item.bounding_box()["x"] for item in options.all())) == 1
+            helper = "Tunjuk Gambar" if activity == "Pilih Perkataan" else "Tunjuk Perkataan"
+            if button(page, helper).count():
+                expect(page.locator("#choice-hint")).to_be_hidden()
+                button(page, helper).click()
+                expect(page.locator("#choice-hint")).to_be_visible()
+            else:
+                expect(page.locator(".choice-target")).to_have_text("sudu")
+            for width, height in ((320, 568), (568, 320), (1024, 768)):
+                page.set_viewport_size({"width": width, "height": height})
+                assert options.evaluate_all("items => items.map(item => item.dataset.value)") == order
+                assert options.evaluate_all("items => items.every(item => item.getBoundingClientRect().bottom <= innerHeight)")
+            for word in ("sudu", "garpu", "pisau", "cawan", "teko"):
+                page.locator(f'{selector}[data-value="{word}"]').click()
+                expect(page.locator("#feedback")).to_contain_text(f"Pilihan tepat. {word}")
+                button(page, "Seterusnya").click()
+            expect(page.get_by_role("heading", name="Pusingan selesai")).to_be_visible()
     page.close()
 
 
@@ -217,8 +262,8 @@ def test_audio_fixture(browser, root):
     page.wait_for_function("navigator.serviceWorker.controller !== null")
     context.set_offline(True)
     enter(page, "Pilih Gambar")
-    for n in (1, 2):
-        button(page, "Dengar Arahan").click()
+    for n in (2, 3):
+        button(page, "Dengar Semula").click()
         page.wait_for_function(f"window.testAudio.length === {n} && window.testAudio.at(-1).currentTime > 0")
     assert page.evaluate("window.testAudio[0].paused")
     range_result = page.evaluate("""async () => {
@@ -228,23 +273,31 @@ def test_audio_fixture(browser, root):
     assert range_result == [206, 2]
     button(page, "Kata Harian, ke laman utama").click()
     enter(page, "Sebut Nama")
-    button(page, "Cari Perkataan").click()
+    button(page, "Jawapan").click()
+    page.wait_for_function("window.testAudio.length === 4 && window.testAudio.at(-1).currentTime > 0")
+    letters = page.locator(".cell").all_text_contents()
+    button(page, "Dengar Semula").click()
+    page.wait_for_function("window.testAudio.length === 5 && window.testAudio.at(-1).currentTime > 0")
+    assert page.locator(".cell").all_text_contents() == letters
     button(page, "Langkau").click()
     button(page, "Dengar Jawapan").click()
-    page.wait_for_function("window.testAudio.length === 3 && window.testAudio.at(-1).currentTime > 0")
+    page.wait_for_function("window.testAudio.length === 6 && window.testAudio.at(-1).currentTime > 0")
     context.close()
     server.shutdown()
 
 
 if __name__ == "__main__":
-    server, url = serve(APP.parent)
     with sync_playwright() as playwright, tempfile.TemporaryDirectory() as temp:
+        shutil.copytree(APP, Path(temp) / "kata-harian", ignore=shutil.ignore_patterns(".git"))
+        server, url = serve(temp)
         executable = os.environ.get("CHROMIUM_PATH") or shutil.which("chromium")
         browser = playwright.chromium.launch(executable_path=executable)
         test_phone(browser, url)
         print("PASS phone touch, five-card rounds, puzzle controls, icons and offline images")
         test_tablet(browser, url)
         print("PASS landscape tablet, mouse drag and rotation")
+        test_responsive_choices(browser, url)
+        print("PASS all photo and word choice counts, reading mode, hints and responsive rotation")
         test_audio_fixture(browser, Path(temp))
         print("PASS offline answer and prompt replay using a temporary audio fixture")
         browser.close()
