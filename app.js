@@ -49,9 +49,9 @@ const instructions = {
   ],
 };
 const choiceLabels = {
-  name: ['Lihat gambar, sebut namanya dan cari perkataan.', 'Look at the picture, say its name and find the word.'],
-  choose: ['Dengar atau baca perkataan, kemudian pilih gambar.', 'Listen to or read the word, then choose the picture.'],
-  words: ['Dengar dan pilih perkataan yang sepadan.', 'Listen and choose the matching written word.'],
+  name: ['Sebut nama dan cari kata.', 'Say and find the word.'],
+  choose: ['Dengar atau baca. Pilih gambar.', 'Listen or read. Pick a picture.'],
+  words: ['Dengar dan pilih kata.', 'Listen and pick the word.'],
 };
 
 function guideSeen() {
@@ -62,11 +62,11 @@ function guideSeen() {
 function guide(returnTo = themes) {
   guideReturn = returnTo;
   screen = 'guide';
-  show(`${heading('Cara Bermain / How to Play', activityNames[activity])}
+  show(`${heading('Cara Bermain / <span lang="en">How to Play</span>', activityNames[activity])}
     <ol class="guide">${instructions[activity].map(([ms, en]) => `<li>${ms}<p lang="en">${en}</p></li>`).join('')}</ol>
     <div class="guide-note"><p>Beri masa untuk mencuba. Anda boleh membantu jika diperlukan.</p>
     <p lang="en">Give the player time to try. You can help if needed.</p></div>
-    <div class="actions">${buttons('start-mode', 'Mula / Start', 'primary')}</div>`);
+    <div class="actions">${buttons('start-mode', 'Mula / <span lang="en">Start</span>', 'primary')}</div>`);
 }
 const buttons = (action, text, kind = 'secondary', extra = '') =>
   `<button type="button" class="button ${kind}" data-action="${action}" ${extra}>${text}</button>`;
@@ -143,7 +143,7 @@ function setup() {
         ${[2, 4, 6].map(count => `<label><input type="radio" name="count" value="${count}" ${count === choiceCount ? 'checked' : ''}> ${count}</label>`).join('')}
       </fieldset>
       <button type="submit" class="button primary">Mula pusingan</button>
-      ${buttons('guide', 'Cara Bermain / How to Play', 'quiet')}
+      ${buttons('guide', 'Cara Bermain / <span lang="en">How to Play</span>', 'quiet')}
     </form>`);
 }
 
@@ -198,11 +198,11 @@ function renderName() {
   }
 
   const fit = card.word.length <= 5;
-  show(`${cardHeading('Cari perkataan')}<section class="name-layout">
+  show(`<section class="name-layout">${cardHeading('Cari perkataan')}
     <div class="puzzle-side">
       <figure class="picture">${photo(card)}</figure>
-      <div id="puzzle-actions" class="actions wrap">
-        ${buttons('word-audio', 'Dengar Semula')}${buttons('puzzle-help', 'Petunjuk', 'secondary', 'aria-expanded="false" aria-controls="puzzle-tools"')}${buttons('skip', 'Langkau', 'quiet')}
+      <div id="puzzle-actions" class="actions wrap"><div class="puzzle-buttons">
+        ${buttons('word-audio', 'Dengar Semula')}${buttons('puzzle-help', 'Petunjuk', 'secondary', 'aria-expanded="false" aria-controls="puzzle-tools"')}</div>${buttons('skip', 'Langkau', 'quiet')}
       </div>
       <div id="puzzle-tools" hidden>
         <div class="actions wrap">${buttons('hint', 'Tunjuk Huruf Pertama')}${buttons('aid', 'Tunjuk Perkataan')}</div>
