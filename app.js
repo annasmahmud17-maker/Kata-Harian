@@ -249,7 +249,7 @@ function renderChoice() {
     <section class="choice-layout">
       <div class="prompt">
         ${buttons('prompt-audio', read ? 'Dengar Perkataan' : 'Dengar Semula', 'primary')}
-        ${read ? `<p class="choice-target">${card.word}</p>` : buttons('choice-hint', words ? 'Tunjuk Gambar' : 'Tunjuk Perkataan', 'quiet', 'aria-expanded="false" aria-controls="choice-hint"')}
+        ${read ? `<p class="choice-target">${syllableWord()}</p>` : buttons('choice-hint', words ? 'Tunjuk Gambar' : 'Tunjuk Perkataan', 'quiet', 'aria-expanded="false" aria-controls="choice-hint"')}
         ${read ? '' : `<div id="choice-hint" hidden>${words ? photo(card) : `<p class="choice-target">${syllableWord()}</p>`}</div>`}
         <div id="companion" hidden><details><summary>Teks untuk pendamping</summary><p>Bacakan: <strong>${words || read ? card.word : `Pilih ${card.word}.`}</strong></p></details></div>
         <p class="audio-status" id="audio-status" role="status"></p>
@@ -346,7 +346,11 @@ function choose(word, skipped = false) {
     button.setAttribute('aria-pressed', String(active));
     if (choiceComplete && !button.disabled) button.setAttribute('aria-disabled', 'true');
   }
-  message(skipped ? 'Kad dilangkau.' : choiceComplete ? `Pilihan tepat. ${card.word}.` : 'Cuba lagi.');
+  if (!skipped && choiceComplete && activity === 'choose' && promptMode === 'read') {
+    document.querySelector('#feedback').innerHTML = `Pilihan tepat. ${syllableWord()}.`;
+  } else {
+    message(skipped ? 'Kad dilangkau.' : choiceComplete ? `Pilihan tepat. ${card.word}.` : 'Cuba lagi.');
+  }
   if (choiceComplete) {
     document.querySelector('#choice-skip').hidden = true;
     document.querySelector('#choice-next').hidden = false;
