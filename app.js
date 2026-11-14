@@ -2,6 +2,9 @@ import {cards, rounds} from './data.js';
 import {line, makePuzzle} from './puzzle.js';
 
 const app = document.querySelector('#app');
+const bar = document.querySelector('.bar');
+const landscape = matchMedia('(orientation: landscape)');
+let puzzleHeading;
 const standalone = matchMedia('(display-mode: standalone)');
 const installed = () => standalone.matches || navigator.standalone === true || installCompleted;
 let installPrompt;
@@ -75,11 +78,21 @@ function heading(title, detail = '') {
   return `<header class="section-heading">${detail ? `<p class="context">${detail}</p>` : ''}<h1 tabindex="-1">${title}</h1></header>`;
 }
 
+function positionPuzzleHeading() {
+  if (!puzzleHeading) return;
+  const destination = landscape.matches ? bar : app.querySelector('.name-layout');
+  if (puzzleHeading.parentElement !== destination) destination.prepend(puzzleHeading);
+}
+
 function show(markup) {
+  puzzleHeading?.remove();
+  puzzleHeading = undefined;
   pointer = null;
   cells = [];
   app.dataset.screen = screen;
   app.innerHTML = markup;
+  puzzleHeading = app.querySelector('.name-layout .section-heading');
+  positionPuzzleHeading();
   app.querySelectorAll('img[data-media]').forEach(img => {
     const fail = () => {
       img.hidden = true;
@@ -91,7 +104,7 @@ function show(markup) {
     if (img.complete && !img.naturalWidth) fail();
   });
   window.scrollTo(0, 0);
-  app.querySelector('h1')?.focus({preventScroll: true});
+  (puzzleHeading || app).querySelector('h1')?.focus({preventScroll: true});
 }
 
 function photo(item, label = 'Gambar objek') {
@@ -455,7 +468,8 @@ app.addEventListener('submit', event => {
   startRound();
 });
 
-matchMedia('(orientation: landscape)').addEventListener('change', () => {
+landscape.addEventListener('change', () => {
+  positionPuzzleHeading();
   if (!pointer) return;
   pointer = null;
   mark(first === null ? [] : [first]);

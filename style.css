@@ -176,20 +176,46 @@ footer:has(#offline[hidden]) { display: none; }
   .intro-photo .object-photo { max-height: min(370px, calc(100dvh - 90px)); }
   .name-layout {
     grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr) minmax(0, 1.45fr);
-    grid-template-areas: "heading photo grid" "controls photo grid" "hints photo grid";
-    grid-template-rows: auto auto 1fr;
+    grid-template-areas: "controls photo grid" "hints photo grid";
+    grid-template-rows: auto 1fr;
     align-items: start;
     gap: 8px 12px;
     width: 100%;
   }
-  .name-layout .section-heading { grid-area: heading; text-align: left; }
+  .bar:has(> .section-heading) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+    grid-template-areas: "progress brand title";
+    align-items: center;
+    column-gap: 8px;
+  }
+  .bar > .section-heading { display: contents; }
+  .bar:has(> .section-heading) .brand { grid-area: brand; white-space: nowrap; }
+  .bar > .section-heading .context {
+    grid-area: progress;
+    margin: 0;
+    text-align: left;
+    font-size: clamp(.66rem, 1.65vw, .95rem);
+    line-height: 1.2;
+  }
+  .bar > .section-heading h1 {
+    grid-area: title;
+    text-align: right;
+    font-size: clamp(.94rem, 2.5vw, 1.5rem);
+  }
   .name-layout .puzzle-side, #puzzle-actions { display: contents; }
   .name-layout .picture {
     grid-area: photo; align-self: center; margin: 0 auto 44px;
     width: min(100%, 208px);
   }
   .name-layout .picture .object-photo { max-height: min(145px, 28dvh); }
-  .puzzle-buttons { grid-area: controls; display: grid; gap: 8px; justify-items: start; }
+  .puzzle-buttons { grid-area: controls; display: flex; gap: 6px; align-items: stretch; }
+  #puzzle-actions .puzzle-buttons .button {
+    min-width: 0;
+    padding-inline: clamp(4px, 1vw, 10px);
+    font-size: clamp(.76rem, 1.85vw, 1rem);
+    line-height: 1.2;
+  }
   #puzzle-actions [data-action="skip"] {
     grid-area: photo; align-self: center; justify-self: center;
     margin-top: calc(min(145px, 28dvh) + 4px);
