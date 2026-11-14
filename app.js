@@ -205,7 +205,6 @@ function renderName() {
         ${buttons('word-audio', 'Dengar Semula')}${buttons('puzzle-help', 'Petunjuk', 'secondary', 'aria-expanded="false" aria-controls="puzzle-tools"')}${buttons('skip', 'Langkau', 'quiet')}
       </div>
       <div id="puzzle-tools" hidden>
-        <p>Seret atau ketik huruf pertama dan terakhir. Papan kekunci: guna anak panah dan Enter.</p>
         <div class="actions wrap">${buttons('hint', 'Tunjuk Huruf Pertama')}${buttons('aid', 'Tunjuk Perkataan')}</div>
         <div class="size-row" role="group" aria-label="Saiz petak">
           ${[8, 5].map(size => buttons('size', `${size} × ${size}`, 'size', `data-value="${size}" aria-pressed="${gridSize === size}" ${size === 5 && !fit ? 'disabled aria-describedby="size-help"' : ''}`)).join('')}
