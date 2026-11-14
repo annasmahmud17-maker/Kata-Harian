@@ -1,7 +1,7 @@
 import {mediaFiles} from './data.js';
 
 const prefix = `kata-harian:${self.registration.scope}:`;
-const cacheName = prefix + 'v13';
+const cacheName = prefix + 'v14';
 const shell = [
   './', './index.html', './style.css', './app.js', './data.js', './puzzle.js', './app.webmanifest',
   './assets/icons/logo.webp', './assets/icons/kh-32.png', './assets/icons/kh-180.png',

@@ -102,9 +102,9 @@ def test_phone(browser, url):
             touch(session, cell_point(page, pos[-1]), "touchEnd")
             expect(page.locator(".cell.selected")).to_have_count(len(word))
             expect(page.locator(".answer-word .red")).to_have_text("su")
-            expect(page.locator(".answer-word > span").nth(1)).to_have_text("du")
+            expect(page.locator(".answer-word .syllable-word > span").nth(1)).to_have_text("du")
             assert page.locator(".answer-word .red").evaluate("e => getComputedStyle(e).color") == "rgb(157, 25, 42)"
-            assert page.locator(".answer-word > span").nth(1).evaluate("e => getComputedStyle(e).color") == "rgb(0, 0, 0)"
+            assert page.locator(".answer-word .syllable-word > span").nth(1).evaluate("e => getComputedStyle(e).color") == "rgb(0, 0, 0)"
             assert page.locator("#grid").bounding_box()["y"] < page.locator("#answer").bounding_box()["y"]
         elif i == 1:
             pos = path(page, word)

@@ -193,10 +193,14 @@ function cardHeading(title) {
   return heading(title, `${activityNames[activity]} · ${theme} · Kad ${index + 1} daripada ${deck.length}`);
 }
 
+function syllableWord() {
+  return `<span class="syllable-word" role="img" aria-label="${card.word}">${card.syllables.map((part, i) =>
+    `<span aria-hidden="true" class="${i % 2 === 0 ? 'red' : ''}">${part}</span>`).join('')}</span>`;
+}
+
 function answer() {
   return `<div class="answer" id="answer" hidden>
-    <div class="answer-line"><span class="answer-word" role="img" aria-label="${card.word}">${card.syllables.map((part, i) =>
-      `<span aria-hidden="true" class="${i % 2 === 0 ? 'red' : ''}">${part}</span>`).join('')}</span>
+    <div class="answer-line"><span class="answer-word">${syllableWord()}</span>
     ${buttons('word-audio', 'Dengar Jawapan', 'secondary', `aria-disabled="${!card.wordAudio}"`)}</div>
     <p class="audio-status" id="answer-status" role="status">${card.wordAudio ? '' : 'Rakaman belum tersedia. Pendamping boleh menyebut jawapan.'}</p>
     ${buttons('next', 'Seterusnya', 'primary')}
@@ -246,7 +250,7 @@ function renderChoice() {
       <div class="prompt">
         ${buttons('prompt-audio', read ? 'Dengar Perkataan' : 'Dengar Semula', 'primary')}
         ${read ? `<p class="choice-target">${card.word}</p>` : buttons('choice-hint', words ? 'Tunjuk Gambar' : 'Tunjuk Perkataan', 'quiet', 'aria-expanded="false" aria-controls="choice-hint"')}
-        ${read ? '' : `<div id="choice-hint" hidden>${words ? photo(card) : `<p class="choice-target">${card.word}</p>`}</div>`}
+        ${read ? '' : `<div id="choice-hint" hidden>${words ? photo(card) : `<p class="choice-target">${syllableWord()}</p>`}</div>`}
         <div id="companion" hidden><details><summary>Teks untuk pendamping</summary><p>Bacakan: <strong>${words || read ? card.word : `Pilih ${card.word}.`}</strong></p></details></div>
         <p class="audio-status" id="audio-status" role="status"></p>
       </div>

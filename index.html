@@ -13,7 +13,11 @@
   <script type="module" src="./app.js"></script>
 </head>
 <body>
-  <header class="bar"><button id="home" class="brand" type="button" aria-label="Kata Harian, ke laman utama"><span aria-hidden="true">KH</span> Kata Harian</button></header>
+  <header class="bar"><button id="home" class="brand" type="button" aria-label="Kata Harian, ke laman utama"><span aria-hidden="true">KH</span> Kata Harian
+    <svg class="home-icon" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+      <path d="m3 10 9-7 9 7M5 9v12h5v-6h4v6h5V9"/>
+    </svg>
+  </button></header>
   <main id="app"></main>
   <footer><p id="offline" role="status" hidden>Anda di luar talian. Gambar dan audio yang belum dimuat turun mungkin tidak tersedia.</p></footer>
   <noscript>Aktifkan JavaScript untuk menggunakan Kata Harian.</noscript>

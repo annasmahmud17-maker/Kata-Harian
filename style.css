@@ -32,6 +32,7 @@ h1, p, figure { margin: 0; }
   min-height: 48px; border: 0; background: transparent; padding: 4px 10px;
   border-radius: 10px; margin: auto; color: var(--purple); font-weight: 750;
 }
+.home-icon { flex: none; }
 .brand span { border: 1px solid #b899c5; background: var(--lavender); border-radius: 9px; padding: 3px 7px; }
 main, footer {
   width: min(100%, 990px); margin: auto;
@@ -101,7 +102,8 @@ h1 { font-size: clamp(1.85rem, 5.5vw, 2.85rem); letter-spacing: -.035em; line-he
 .answer { padding: 12px 0 0; }
 .answer-line { display: flex; align-items: center; flex-wrap: wrap; gap: 8px 14px; }
 .answer-word { font-size: clamp(2.2rem, 9vw, 3.3rem); line-height: 1.12; font-weight: 800; color: #000; }
-.answer-word .red { color: var(--red); }
+.syllable-word { color: #000; }
+.syllable-word .red { color: var(--red); }
 .audio-status { margin: 6px 0; color: var(--muted); }
 .audio-status:empty { margin: 0; }
 .answer .primary { margin-top: 8px; }
