@@ -217,12 +217,12 @@ function renderName() {
       <div id="puzzle-actions" class="actions wrap"><div class="puzzle-buttons">
         ${buttons('word-audio', 'Dengar Semula')}${buttons('puzzle-help', 'Petunjuk', 'secondary', 'aria-expanded="false" aria-controls="puzzle-tools"')}</div>${buttons('skip', 'Langkau', 'quiet')}
       </div>
-      <div id="puzzle-tools" hidden>
-        <div class="actions wrap">${buttons('hint', 'Tunjuk Huruf Pertama')}${buttons('aid', 'Tunjuk Perkataan')}</div>
-        <div class="size-row" role="group" aria-label="Saiz petak">
+      <div id="puzzle-size" class="size-row" role="group" aria-label="Saiz petak">
           ${[8, 5].map(size => buttons('size', `${size} × ${size}`, 'size', `data-value="${size}" aria-pressed="${gridSize === size}" ${size === 5 && !fit ? 'disabled aria-describedby="size-help"' : ''}`)).join('')}
           ${fit ? '' : '<p id="size-help">Perkataan ini perlukan petak 8 × 8.</p>'}
-        </div>
+      </div>
+      <div id="puzzle-tools" hidden>
+        <div class="actions wrap">${buttons('hint', 'Tunjuk Huruf Pertama')}${buttons('aid', 'Tunjuk Perkataan')}</div>
       </div>
       <p id="aid" class="aid" hidden>${card.word}</p>
       <p class="audio-status" id="audio-status" role="status"></p>
@@ -297,7 +297,7 @@ function reveal(text, found = true) {
   solved = true;
   mark(found ? puzzle.positions : []);
   for (const cell of cells) cell.tabIndex = -1;
-  for (const id of ['puzzle-tools', 'puzzle-actions', 'aid', 'audio-status']) {
+  for (const id of ['puzzle-tools', 'puzzle-size', 'puzzle-actions', 'aid', 'audio-status']) {
     const el = document.getElementById(id);
     if (el) el.hidden = true;
   }
@@ -421,11 +421,12 @@ const actions = {
   size(value) {
     const size = Number(value);
     if (size === gridSize || card.word.length > size || solved) return;
+    const helpOpen = !document.getElementById('puzzle-tools').hidden;
     selectedSize = gridSize = size;
     first = null;
     puzzle = makePuzzle(size, card.word);
     renderName();
-    actions['puzzle-help']();
+    if (helpOpen) actions['puzzle-help']();
     if (hint) actions.hint();
     if (aid) actions.aid();
     app.querySelector(`[data-action="size"][data-value="${size}"]`).focus();

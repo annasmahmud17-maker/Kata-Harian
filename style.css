@@ -143,7 +143,7 @@ footer:has(#offline[hidden]) { display: none; }
 #puzzle-actions { margin-top: 4px; }
 #puzzle-actions .button, .choice-layout .button, .answer .button { padding: 4px 10px; min-height: 44px; }
 #puzzle-tools { text-align: center; }
-#puzzle-tools .size-row { justify-content: center; }
+#puzzle-size { justify-content: center; margin: 0; }
 .grid { width: min(100%, 430px); margin-inline: auto; }
 .answer-space { min-height: 104px; }
 .answer { padding-block: 4px; }
@@ -176,8 +176,8 @@ footer:has(#offline[hidden]) { display: none; }
   .intro-photo .object-photo { max-height: min(370px, calc(100dvh - 90px)); }
   .name-layout {
     grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr) minmax(0, 1.45fr);
-    grid-template-areas: "controls photo grid" "hints photo grid";
-    grid-template-rows: auto 1fr;
+    grid-template-areas: "controls photo grid" "size photo grid" "hints photo grid";
+    grid-template-rows: auto auto 1fr;
     align-items: start;
     gap: 8px 12px;
     width: 100%;
@@ -221,7 +221,8 @@ footer:has(#offline[hidden]) { display: none; }
     margin-top: calc(min(145px, 28dvh) + 4px);
   }
   #puzzle-tools { grid-area: hints; text-align: left; }
-  #puzzle-tools .actions, #puzzle-tools .size-row { justify-content: start; }
+  #puzzle-size { grid-area: size; justify-content: start; }
+  #puzzle-tools .actions { justify-content: start; }
   .name-layout .aid, .name-layout .audio-status, .name-layout .feedback { grid-column: 1; }
   .name-layout .practice { grid-area: grid; }
   .name-layout .grid {
