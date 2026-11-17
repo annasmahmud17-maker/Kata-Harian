@@ -72,3 +72,18 @@ test('137 audio imports match the supplied ZIP mapping without missing word pair
     }
   });
 });
+
+test('activity photo distractors are activities and exclude ambiguous target pairs at every choice count', () => {
+  const activities = new Set(rounds['Aktiviti/Perbuatan'].flat());
+  const excluded = {berjalan: 'lari', lari: 'berjalan', buka: 'tutup', tutup: 'buka'};
+  for (const word of activities) for (const count of [2, 4, 6]) for (let offset = 0; offset < 60; offset++) {
+    const options = makeChoices(word, count, offset, 'Aktiviti/Perbuatan');
+    assert.equal(options.length, count);
+    assert.equal(new Set(options).size, count);
+    assert.equal(options.filter(x => x === word).length, 1);
+    assert(options.every(x => activities.has(x)));
+    assert.equal(options.filter(x => x !== word).length, count - 1);
+    if (excluded[word]) assert(!options.includes(excluded[word]), word + ': ' + options.join(', '));
+  }
+  assert.deepEqual(makeChoices('sudu', 6, 3, 'Dapur'), makeChoices('sudu', 6, 3));
+});

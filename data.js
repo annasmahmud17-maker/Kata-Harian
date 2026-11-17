@@ -50,8 +50,17 @@ export const cards = Object.fromEntries(Object.values(bank).flat(2).map(segments
 }));
 export const mediaFiles = [...new Set([questionAudio, ...Object.values(cards).flatMap(card => [card.image, card.wordAudio, card.promptAudio].filter(Boolean))])];
 
-export function makeChoices(word, count, offset = 0) {
-  const pool = Object.keys(cards).filter(other => other !== word);
+const activityWords = rounds['Aktiviti/Perbuatan'].flat();
+const excludedActivityPairs = {
+  berjalan: 'lari', lari: 'berjalan',
+  buka: 'tutup', tutup: 'buka',
+};
+
+export function makeChoices(word, count, offset = 0, photoTheme = null) {
+  const activityPhotos = photoTheme === 'Aktiviti/Perbuatan';
+  const candidates = activityPhotos ? activityWords : Object.keys(cards);
+  const pool = candidates.filter(other => other !== word &&
+    (!activityPhotos || other !== excludedActivityPairs[word]));
   const start = offset % pool.length;
   const result = [...pool.slice(start), ...pool.slice(0, start)].slice(0, count - 1);
   result.splice(offset % count, 0, word);

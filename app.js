@@ -184,7 +184,7 @@ function startCard() {
     renderName();
     if (theme === 'Aktiviti/Perbuatan') playAudio(questionAudio);
   } else {
-    choices = makeChoices(card.word, choiceCount, index * 3 + round);
+    choices = makeChoices(card.word, choiceCount, index * 3 + round, activity === 'choose' ? theme : null);
     renderChoice();
     if (activity === 'words' || promptMode === 'listen') actions['prompt-audio']();
   }

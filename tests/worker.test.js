@@ -53,7 +53,7 @@ test('service worker precaches scoped assets, removes obsolete caches, and serve
   await lifecycle('install');
   await lifecycle('activate');
   assert(claimed);
-  assert.deepEqual([...stores.keys()], ['unrelated-cache', `kata-harian:${scope}:v19`]);
+  assert.deepEqual([...stores.keys()], ['unrelated-cache', `kata-harian:${scope}:v20`]);
 
   online = false;
   const get = (path, options = {}) => new Promise(resolve => events.get('fetch')({
