@@ -42,4 +42,8 @@
 
 68 perkataan unik baharu ditambah. Semua gambar baharu dijana khusus untuk aplikasi menggunakan image generation; tiada foto stok pihak ketiga ditambah. Enam helaian foto (dapur-v2, rumah-v2, makanan-v2, kebersihan-v2, aktiviti-a-v2, aktiviti-b-v2) disimpan dalam assets/photos sebagai WebP. Aplikasi memaparkan satu petak foto setiap kad melalui images.js. Bakul ialah bakul pakaian dan cermin ialah cermin mengemas diri bagi kedua-dua kategori. Gambar perbuatan menunjukkan orang dewasa melakukan aktiviti.
 
-Semua 60 fail MP3 asal dikekalkan tanpa suntingan. Medan audio untuk 68 perkataan baharu ialah null sehingga rakaman ditambah; aplikasi memaparkan makluman rakaman belum tersedia dan menyediakan teks untuk pendamping. Tiada audio sintetik atau rakaman sementara ditambah.
+Semua 60 fail MP3 asal dikekalkan tanpa suntingan. Rakaman untuk 68 perkataan baharu kini dipasang seperti diterangkan dalam Audio v2 di bawah. Tiada rakaman sementara ditambah.
+
+## Audio v2 dipasang
+
+137 rakaman Narakeet daripada ZIP pengguna dipasang mengikut susunan skrip: 68 sebutan perkataan, 68 arahan Pilih dan satu soalan Apakah yang sedang dilakukan?. Semua 60 rakaman asal dikekalkan tanpa suntingan. Semua 98 perkataan kini mempunyai kedua-dua rakaman. Soalan dimainkan pada kad gambar Aktiviti/Perbuatan dalam Sebut Nama dan boleh diulang melalui Dengar Soalan. Pemetaan nama fail asal dan SHA-256 direkodkan dalam tests/audio-import-v2.json. Fail MP3 baharu dipasang tanpa pengekodan semula.

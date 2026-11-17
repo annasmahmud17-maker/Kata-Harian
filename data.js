@@ -33,7 +33,7 @@ const bank = {
 
 import {images} from './images.js';
 
-const recorded = new Set('sudu garpu pisau cawan teko gelas senduk pinggan beras lesung meja sofa tingkap pintu lampu langsir bantal kipas katil tikar ikan ayam telur pisang timun sotong udang kubis terung nanas'.split(' '));
+export const questionAudio = './assets/audio/apakah-yang-sedang-dilakukan.mp3';
 
 export const rounds = Object.fromEntries(Object.entries(bank).map(([theme, sets]) => [
   theme, sets.map(set => set.map(segments => segments.replaceAll(' ', ''))),
@@ -44,11 +44,11 @@ export const cards = Object.fromEntries(Object.values(bank).flat(2).map(segments
   return [word, {
     word, syllables,
     ...(images[word] || {image: `./assets/photos/${word}.webp`}),
-    wordAudio: recorded.has(word) ? `./assets/audio/${word}.mp3` : null,
-    promptAudio: recorded.has(word) ? `./assets/audio/pilih-${word}.mp3` : null,
+    wordAudio: `./assets/audio/${word}.mp3`,
+    promptAudio: `./assets/audio/pilih-${word}.mp3`,
   }];
 }));
-export const mediaFiles = [...new Set(Object.values(cards).flatMap(card => [card.image, card.wordAudio, card.promptAudio].filter(Boolean)))];
+export const mediaFiles = [...new Set([questionAudio, ...Object.values(cards).flatMap(card => [card.image, card.wordAudio, card.promptAudio].filter(Boolean))])];
 
 export function makeChoices(word, count, offset = 0) {
   const pool = Object.keys(cards).filter(other => other !== word);

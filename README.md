@@ -1,6 +1,6 @@
 # Kata Harian
 
-Bahan latihan perkataan harian dalam bahasa Melayu. Tiga aktiviti bersama pendamping menggunakan bank v2.0: 100 kad (98 perkataan unik), lima kategori dan empat tahap bagi setiap kategori. Setiap tahap mengandungi lima kad. Pasar kini dinamakan Makanan & Minuman. Rakaman asal 30 perkataan dikekalkan; 68 perkataan baharu menunggu rakaman.
+Bahan latihan perkataan harian dalam bahasa Melayu. Tiga aktiviti bersama pendamping menggunakan bank v2.0: 100 kad (98 perkataan unik), lima kategori dan empat tahap bagi setiap kategori. Setiap tahap mengandungi lima kad. Pasar kini dinamakan Makanan & Minuman. Semua 98 perkataan mempunyai rakaman sebutan dan arahan Pilih. Rakaman asal 30 perkataan dikekalkan. Soalan Apakah yang sedang dilakukan? mempunyai rakaman tersendiri.
 
 ## Cuba pada komputer
 

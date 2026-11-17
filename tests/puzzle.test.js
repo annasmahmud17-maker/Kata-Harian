@@ -1,7 +1,8 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {cards, rounds, makeChoices} from '../data.js';
+import {createHash} from 'node:crypto';
+import {cards, rounds, makeChoices, questionAudio} from '../data.js';
 import {line, makePuzzle, occurrences} from '../puzzle.js';
 
 const approved = {
@@ -16,7 +17,7 @@ test('v2 approved bank order and spelling, syllables and retained recordings', (
   assert.deepEqual(rounds, Object.fromEntries(Object.entries(approved).map(([k, v]) => [k, v.map(row => row.split(' '))])));
   assert.equal(Object.values(rounds).flat(2).length, 100);
   assert.equal(Object.keys(cards).length, 98);
-  assert.equal(Object.values(cards).filter(card => card.wordAudio && card.promptAudio).length, 30);
+  assert.equal(Object.values(cards).filter(card => card.wordAudio && card.promptAudio).length, 98);
   for (const [word, card] of Object.entries(cards)) {
     assert.equal(card.word, word);
     assert.equal(card.syllables.join(''), word);
@@ -53,4 +54,21 @@ test('rejects reverse, diagonal and row wrapping, and catches repeated filler', 
     const {letters, positions} = makePuzzle(8, 'aaaaa', () => sample);
     assert.deepEqual(occurrences(letters, 8, 'AAAAA'), [positions]);
   }
+});
+
+test('137 audio imports match the supplied ZIP mapping without missing word pairs', () => {
+  const imports = JSON.parse(readFileSync(new URL('./audio-import-v2.json', import.meta.url), 'utf8'));
+  assert.equal(imports.length, 137);
+  assert.equal(new Set(imports.map(x => x.filename)).size, 137);
+  assert.equal(questionAudio, './assets/audio/' + imports[0].filename);
+  imports.forEach((entry, i) => {
+    assert.equal(entry.source, String(i + 1).padStart(4, '0') + '.mp3');
+    const bytes = readFileSync(new URL('../assets/audio/' + entry.filename, import.meta.url));
+    assert.equal(createHash('sha256').update(bytes).digest('hex'), entry.sha256);
+    if (i > 0) {
+      const word = entry.filename.replace(/^pilih-/, '').replace(/\.mp3$/, '');
+      assert(cards[word]);
+      assert.equal(i % 2 ? cards[word].wordAudio : cards[word].promptAudio, './assets/audio/' + entry.filename);
+    }
+  });
 });

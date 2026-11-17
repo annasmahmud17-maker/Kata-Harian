@@ -1,0 +1,824 @@
+[
+  {
+    "source": "0001.mp3",
+    "filename": "apakah-yang-sedang-dilakukan.mp3",
+    "text": "Apakah yang sedang dilakukan?",
+    "sha256": "b707cc1b67eb1e8c74c1e1dd1b3474df84631b568bf76d7b6b69b7a3ed8be398"
+  },
+  {
+    "source": "0002.mp3",
+    "filename": "mangkuk.mp3",
+    "text": "mangkuk.",
+    "sha256": "49096e1a801baacce5c0f54e055a1b2eac7d491012f54933c8e296f08bbeb86f"
+  },
+  {
+    "source": "0003.mp3",
+    "filename": "pilih-mangkuk.mp3",
+    "text": "Pilih mangkuk.",
+    "sha256": "5954f04ebf398ea7fd0fb2eb11fb1447fba126ad812f5e75e7e5a7778e8edf89"
+  },
+  {
+    "source": "0004.mp3",
+    "filename": "periuk.mp3",
+    "text": "periuk.",
+    "sha256": "c56e73b9cdd26d68799e7a22f2a07fddc8910d1aa7dd99a6009235abceeec2c3"
+  },
+  {
+    "source": "0005.mp3",
+    "filename": "pilih-periuk.mp3",
+    "text": "Pilih periuk.",
+    "sha256": "1dd234853b390358a6400e1e4c0f8790e770cf7a2e86d6cededbff8c6954b946"
+  },
+  {
+    "source": "0006.mp3",
+    "filename": "kuali.mp3",
+    "text": "kuali.",
+    "sha256": "0eba9594ee179d7d752e6534a820a2c4bf5191bc8affcada7c5db5b3bc9edce9"
+  },
+  {
+    "source": "0007.mp3",
+    "filename": "pilih-kuali.mp3",
+    "text": "Pilih kuali.",
+    "sha256": "4500475c125250c360fc2bd8c0cfc51b87baa1e68d37feaaf47b30b80c7c288a"
+  },
+  {
+    "source": "0008.mp3",
+    "filename": "cerek.mp3",
+    "text": "cerek.",
+    "sha256": "81aa08f9db90510324fc9bc52a8b368a9a6152c9d232d344cf8f496279bb7b40"
+  },
+  {
+    "source": "0009.mp3",
+    "filename": "pilih-cerek.mp3",
+    "text": "Pilih cerek.",
+    "sha256": "fa62b5a15e22c975379b60167583e1795fb13f06cb7c120bd5f38af1ca63f01c"
+  },
+  {
+    "source": "0010.mp3",
+    "filename": "dulang.mp3",
+    "text": "dulang.",
+    "sha256": "8e21cc296ebacb1200f33931d802f0379bcf3b0c13369444f4585dc952ee21b1"
+  },
+  {
+    "source": "0011.mp3",
+    "filename": "pilih-dulang.mp3",
+    "text": "Pilih dulang.",
+    "sha256": "89350e55ca6f735f36a5694e22e12ae08bd0371eb3811912a2b947d419bc43da"
+  },
+  {
+    "source": "0012.mp3",
+    "filename": "sudip.mp3",
+    "text": "sudip.",
+    "sha256": "b709ed317a91a58f238a7d109a0c0ee20ebe05aa56947936538f62c72ebf599c"
+  },
+  {
+    "source": "0013.mp3",
+    "filename": "pilih-sudip.mp3",
+    "text": "Pilih sudip.",
+    "sha256": "26c7bec1917656571f0f13edd152cfa05641eb35391c09254f427234b5927666"
+  },
+  {
+    "source": "0014.mp3",
+    "filename": "penapis.mp3",
+    "text": "penapis.",
+    "sha256": "b51bf233effb0f5b09208171c5543fce3340cb6513df002383393f8c7f4b41a0"
+  },
+  {
+    "source": "0015.mp3",
+    "filename": "pilih-penapis.mp3",
+    "text": "Pilih penapis.",
+    "sha256": "7d13080bca4be580f58828377c82e3c973f2a93ef2b2d746307e1e8a69be7767"
+  },
+  {
+    "source": "0016.mp3",
+    "filename": "arang.mp3",
+    "text": "arang.",
+    "sha256": "592b18925f4b051e09df85626b092f0e048c8ac184f1cac63527ec76b6996c04"
+  },
+  {
+    "source": "0017.mp3",
+    "filename": "pilih-arang.mp3",
+    "text": "Pilih arang.",
+    "sha256": "6f741312430fd906bb9e6edc20ac0dd1d98a40b7fb3bb976d26bed397751b1de"
+  },
+  {
+    "source": "0018.mp3",
+    "filename": "api.mp3",
+    "text": "api.",
+    "sha256": "81d5e2dd809f14bdec14fc14b3b4c9920028753c66f0cd8384b3d82568997d83"
+  },
+  {
+    "source": "0019.mp3",
+    "filename": "pilih-api.mp3",
+    "text": "Pilih api.",
+    "sha256": "6884efa10ca15551029b42a070b310142fecf5e8429c606f49d8f89c07c11482"
+  },
+  {
+    "source": "0020.mp3",
+    "filename": "minyak.mp3",
+    "text": "minyak.",
+    "sha256": "f08812dd55cad067bd0de8a0fdb5ac711b68af27d0eae01f67e3da1b6572c170"
+  },
+  {
+    "source": "0021.mp3",
+    "filename": "pilih-minyak.mp3",
+    "text": "Pilih minyak.",
+    "sha256": "9c6f1fd466d32fe09b0a913d4f0b3d8c8ee74acdea5fafb60f309e645bce6432"
+  },
+  {
+    "source": "0022.mp3",
+    "filename": "jam.mp3",
+    "text": "jam.",
+    "sha256": "8bb225570bcd3e39fc7743e2352ffa264c9ab3a61f624a94e82d8d746dab526b"
+  },
+  {
+    "source": "0023.mp3",
+    "filename": "pilih-jam.mp3",
+    "text": "Pilih jam.",
+    "sha256": "3a90424b381d53e70838ed3144c37fa4a96a8d28f3b5905a5072d0aab13ea3d0"
+  },
+  {
+    "source": "0024.mp3",
+    "filename": "kunci.mp3",
+    "text": "kunci.",
+    "sha256": "d659bd4ae61bd0dceef5a14dd96c216cdcb717eaa969f291b741896423135e94"
+  },
+  {
+    "source": "0025.mp3",
+    "filename": "pilih-kunci.mp3",
+    "text": "Pilih kunci.",
+    "sha256": "8f453efda4768f80d311107f2593b0a87442a41aa11c6ddc8c34d9a013dad0aa"
+  },
+  {
+    "source": "0026.mp3",
+    "filename": "cermin.mp3",
+    "text": "cermin.",
+    "sha256": "400033ef22a7e87688a4c0ecb361edc81ce7a4041cd23e29b1957c732d8b65fd"
+  },
+  {
+    "source": "0027.mp3",
+    "filename": "pilih-cermin.mp3",
+    "text": "Pilih cermin.",
+    "sha256": "ba9e1e432a41fb5182ad486b0b1bde34549db7f209b0812003f0fe80ccaae27d"
+  },
+  {
+    "source": "0028.mp3",
+    "filename": "payung.mp3",
+    "text": "payung.",
+    "sha256": "73d2151af0eea0d4e56ff4d45d8db0f7f9d8653c4fbc1ce5a17b1bacc2dc7171"
+  },
+  {
+    "source": "0029.mp3",
+    "filename": "pilih-payung.mp3",
+    "text": "Pilih payung.",
+    "sha256": "aaf3f8eb4b3e3dfbcb8d78799ee939d3c9abb6cc592abc8e586b073c5d6ebef9"
+  },
+  {
+    "source": "0030.mp3",
+    "filename": "bakul.mp3",
+    "text": "bakul.",
+    "sha256": "033cb1a019c29ac4be719559840229f8db3ecb9982dc594f2210ae56cf553055"
+  },
+  {
+    "source": "0031.mp3",
+    "filename": "pilih-bakul.mp3",
+    "text": "Pilih bakul.",
+    "sha256": "92241413adf3f3324e3802dbe46bc34b390d1cb897f5a611bad49d79e6b6ab65"
+  },
+  {
+    "source": "0032.mp3",
+    "filename": "kerusi.mp3",
+    "text": "kerusi.",
+    "sha256": "931f05c9da88155afb67580d2dd620cc62fe711cbeb9a4581f8662e8395f5f0a"
+  },
+  {
+    "source": "0033.mp3",
+    "filename": "pilih-kerusi.mp3",
+    "text": "Pilih kerusi.",
+    "sha256": "6160148a09e5e14ac921414c4b1089f5fff57b5987978974df9076259782d1eb"
+  },
+  {
+    "source": "0034.mp3",
+    "filename": "almari.mp3",
+    "text": "almari.",
+    "sha256": "8fb9a7c4686d4cdad1eb9f21812310ee5b781052af279e448ba38edbddbb4638"
+  },
+  {
+    "source": "0035.mp3",
+    "filename": "pilih-almari.mp3",
+    "text": "Pilih almari.",
+    "sha256": "a1e93ba56dfa55ba44aa94c84c8f87160af03e615b764fe2ad421b0049f88085"
+  },
+  {
+    "source": "0036.mp3",
+    "filename": "laci.mp3",
+    "text": "laci.",
+    "sha256": "8178b8cc759a59030c62f91f727a7bb004d9796b62f43f51e2432dd524d68c9d"
+  },
+  {
+    "source": "0037.mp3",
+    "filename": "pilih-laci.mp3",
+    "text": "Pilih laci.",
+    "sha256": "41a7778cab94ed49b1bbe7da91564f9f87e5f5ea1cd120f2892b9f716bfc784a"
+  },
+  {
+    "source": "0038.mp3",
+    "filename": "radio.mp3",
+    "text": "radio.",
+    "sha256": "bf19a472b26a398503470f4c2451e6143d4f98ce7bbd6d826e2500f9172e6118"
+  },
+  {
+    "source": "0039.mp3",
+    "filename": "pilih-radio.mp3",
+    "text": "Pilih radio.",
+    "sha256": "029557a46a64c14b15ea2601fa365a534d1cb49bc38cd11d21283fb1eaa5b3a1"
+  },
+  {
+    "source": "0040.mp3",
+    "filename": "telefon.mp3",
+    "text": "telefon.",
+    "sha256": "bb6299dc418dc27c81f685b4fe5f0941da4cdf9e4436abe97654915eb5b61db6"
+  },
+  {
+    "source": "0041.mp3",
+    "filename": "pilih-telefon.mp3",
+    "text": "Pilih telefon.",
+    "sha256": "b0649dd34e71ed73605cd1b9e94643154f73368a2596f013b9d04e6d780b1d63"
+  },
+  {
+    "source": "0042.mp3",
+    "filename": "nasi.mp3",
+    "text": "nasi.",
+    "sha256": "682188689ccb56ab105846dc017489d249561733c966653190ec56d31676489f"
+  },
+  {
+    "source": "0043.mp3",
+    "filename": "pilih-nasi.mp3",
+    "text": "Pilih nasi.",
+    "sha256": "432a1ab41d309ff22e89608c4546e81e3d70aa9e577b6e984f54cbeb5c3c4167"
+  },
+  {
+    "source": "0044.mp3",
+    "filename": "roti.mp3",
+    "text": "roti.",
+    "sha256": "545e3c73fb1e2f5e0fec7049167ae63240c63c69a7a6864a3948bcfb05d18614"
+  },
+  {
+    "source": "0045.mp3",
+    "filename": "pilih-roti.mp3",
+    "text": "Pilih roti.",
+    "sha256": "f483a3621b0c22edc9a79f09e1767f334031800df0337414d6380eb2caca0348"
+  },
+  {
+    "source": "0046.mp3",
+    "filename": "susu.mp3",
+    "text": "susu.",
+    "sha256": "4e81f3664eed97b69af5471afe66b476e07966960dd64c08c908636eaff14b1f"
+  },
+  {
+    "source": "0047.mp3",
+    "filename": "pilih-susu.mp3",
+    "text": "Pilih susu.",
+    "sha256": "cc9688572959e2d5d45b3738bf46d74e6b47b2db7c05cde2d315e6e92678c2b5"
+  },
+  {
+    "source": "0048.mp3",
+    "filename": "kopi.mp3",
+    "text": "kopi.",
+    "sha256": "22362b15d9977bb4e8b235e88c6d434bf1a5e5825cf0bcea1b0fb6ca31fc374a"
+  },
+  {
+    "source": "0049.mp3",
+    "filename": "pilih-kopi.mp3",
+    "text": "Pilih kopi.",
+    "sha256": "2925f1c20b5a85569f2b38e5ae274d287e9defadd05adf9840bc6a7093c1743e"
+  },
+  {
+    "source": "0050.mp3",
+    "filename": "teh.mp3",
+    "text": "teh.",
+    "sha256": "4074306416d90d1e0ef8f450654d8876deee576180dfc20e2cafee0407731ef1"
+  },
+  {
+    "source": "0051.mp3",
+    "filename": "pilih-teh.mp3",
+    "text": "Pilih teh.",
+    "sha256": "2700820ae71cbe7259ee4c5aac6a8fa57a76a8bc00945df1b7cafedc33cd7f0a"
+  },
+  {
+    "source": "0052.mp3",
+    "filename": "biskut.mp3",
+    "text": "biskut.",
+    "sha256": "edd5bbbeb29125a9ae5bafab0851fac5ed337245ef50ae61075fa261dd1a3b38"
+  },
+  {
+    "source": "0053.mp3",
+    "filename": "pilih-biskut.mp3",
+    "text": "Pilih biskut.",
+    "sha256": "9e60c503d4d0274cf44077b6c053bdada463d1c045114d856f20e730fddb2f4a"
+  },
+  {
+    "source": "0054.mp3",
+    "filename": "kentang.mp3",
+    "text": "kentang.",
+    "sha256": "9793e3fab8892607f49c54131fa085a357928ecc7c9cc5c78edb4877af688611"
+  },
+  {
+    "source": "0055.mp3",
+    "filename": "pilih-kentang.mp3",
+    "text": "Pilih kentang.",
+    "sha256": "7cd298711d398f0bc314c1d1e67337043082ccbbf48997c84c9ab085e24da5fd"
+  },
+  {
+    "source": "0056.mp3",
+    "filename": "betik.mp3",
+    "text": "betik.",
+    "sha256": "646c1a09213efd6bc717e0ddda004ec34cc797b4a50e842c6a5911b68054c371"
+  },
+  {
+    "source": "0057.mp3",
+    "filename": "pilih-betik.mp3",
+    "text": "Pilih betik.",
+    "sha256": "4746d3d97cfd6ec6a6d6c3dec2da9e76e8022616f50c1d13e2ebbf7c77c1842c"
+  },
+  {
+    "source": "0058.mp3",
+    "filename": "kelapa.mp3",
+    "text": "kelapa.",
+    "sha256": "f2b0f49f267ee3f0ac9494c4602d450016b27b916a4efb6af317a3848432f162"
+  },
+  {
+    "source": "0059.mp3",
+    "filename": "pilih-kelapa.mp3",
+    "text": "Pilih kelapa.",
+    "sha256": "2e6cab0ae8c31620ccbec7c421ca9b95e6af20aacaf30779b871789722b0b8b6"
+  },
+  {
+    "source": "0060.mp3",
+    "filename": "durian.mp3",
+    "text": "durian.",
+    "sha256": "c7752161fd32e3cb53eacd967b9e9c6f711a314f60040c43402c2b2d41bf0314"
+  },
+  {
+    "source": "0061.mp3",
+    "filename": "pilih-durian.mp3",
+    "text": "Pilih durian.",
+    "sha256": "b02c54447edcae3b53756da5dd3ee4fb2d8738b68a81d746188c8eb699b14a43"
+  },
+  {
+    "source": "0062.mp3",
+    "filename": "sabun.mp3",
+    "text": "sabun.",
+    "sha256": "aba81b2eff285082e13bc6e4df209992daaed9c1ce556a4d544f9e6e60d95645"
+  },
+  {
+    "source": "0063.mp3",
+    "filename": "pilih-sabun.mp3",
+    "text": "Pilih sabun.",
+    "sha256": "4e8641a51a620ccfd6d17347b2f57bf32583d9a9aedaf74ab99b94ba1c84de88"
+  },
+  {
+    "source": "0064.mp3",
+    "filename": "syampu.mp3",
+    "text": "syampu.",
+    "sha256": "8ededda097baa0a30dacf8e9718f668c7c3b5f5fd7a116aa630bb6e008515166"
+  },
+  {
+    "source": "0065.mp3",
+    "filename": "pilih-syampu.mp3",
+    "text": "Pilih syampu.",
+    "sha256": "f7f23c68224b671d23b5bb3eaa67385b069175c1f50030f7864137be32872221"
+  },
+  {
+    "source": "0066.mp3",
+    "filename": "tuala.mp3",
+    "text": "tuala.",
+    "sha256": "35a39d576fd33515ce84cbdd8dedc02506aeabb13786bb3d99a3f703f4a04bb3"
+  },
+  {
+    "source": "0067.mp3",
+    "filename": "pilih-tuala.mp3",
+    "text": "Pilih tuala.",
+    "sha256": "e21cda9584be977c43646a08e315a7c3d8911f99554283b58762b324749452a9"
+  },
+  {
+    "source": "0068.mp3",
+    "filename": "sikat.mp3",
+    "text": "sikat.",
+    "sha256": "806531d30954418ccc8fbf12354a8ea75eb2ca5053d74093c1fd500552edbc57"
+  },
+  {
+    "source": "0069.mp3",
+    "filename": "pilih-sikat.mp3",
+    "text": "Pilih sikat.",
+    "sha256": "da9811df542714dd22f4a1625f2ed8b5f6245911c9dfbc980026e13e09a13c5c"
+  },
+  {
+    "source": "0070.mp3",
+    "filename": "berus.mp3",
+    "text": "berus.",
+    "sha256": "3a5c388e03f36ae067eaf85dd735ab9b07209a6061cd035b2ea9bebb4ee01fd4"
+  },
+  {
+    "source": "0071.mp3",
+    "filename": "pilih-berus.mp3",
+    "text": "Pilih berus.",
+    "sha256": "e812cc7389bd175545357d2c63aaa39d1fd859c62971ea1aae77440fb3d6f1a7"
+  },
+  {
+    "source": "0072.mp3",
+    "filename": "baldi.mp3",
+    "text": "baldi.",
+    "sha256": "02bc2587cc51208026dbc76208423bee7dd2940e7b77f31243247880573bf5ce"
+  },
+  {
+    "source": "0073.mp3",
+    "filename": "pilih-baldi.mp3",
+    "text": "Pilih baldi.",
+    "sha256": "080c6ce051126161a557e1eff2eb6bab119e4ecfe25b5bc615198ad4dda17594"
+  },
+  {
+    "source": "0074.mp3",
+    "filename": "mop.mp3",
+    "text": "mop.",
+    "sha256": "608dff1ba5dd57cfa12534a22a7fcabd26a757199ff7e935300f0091cf119711"
+  },
+  {
+    "source": "0075.mp3",
+    "filename": "pilih-mop.mp3",
+    "text": "Pilih mop.",
+    "sha256": "b406822b2e27587244780edfe38912973a81035cddc1c37291f42b33cee09c71"
+  },
+  {
+    "source": "0076.mp3",
+    "filename": "kain.mp3",
+    "text": "kain.",
+    "sha256": "ebcd40b287800c1a9506bd92d56e8f63f3bf0391086e88df46df3d02b4f4863f"
+  },
+  {
+    "source": "0077.mp3",
+    "filename": "pilih-kain.mp3",
+    "text": "Pilih kain.",
+    "sha256": "7a3f84fc6631293d0aaa6786f67a77cf74f2845469e6bd2636387b3ff358c2c9"
+  },
+  {
+    "source": "0078.mp3",
+    "filename": "span.mp3",
+    "text": "span.",
+    "sha256": "77dfb64ccfc591bb0c8a408d135a628615d738227d6de97c8d8c490e38e4448f"
+  },
+  {
+    "source": "0079.mp3",
+    "filename": "pilih-span.mp3",
+    "text": "Pilih span.",
+    "sha256": "5b9e58c2d9594ded8e24a8e97db8cad2bb1200e286d0eb5d8cd01a31da3d3462"
+  },
+  {
+    "source": "0080.mp3",
+    "filename": "tisu.mp3",
+    "text": "tisu.",
+    "sha256": "5638beefed8c1bd5d110e50beb8ac6c3bb2177183d924ed6c1bc572ac1a8182c"
+  },
+  {
+    "source": "0081.mp3",
+    "filename": "pilih-tisu.mp3",
+    "text": "Pilih tisu.",
+    "sha256": "d74288d9c5b454a56d3cae8541a06c04d29a18d7e8d112409224fc350176b40f"
+  },
+  {
+    "source": "0082.mp3",
+    "filename": "singki.mp3",
+    "text": "singki.",
+    "sha256": "4275b149ca958ebb25dd8732b3cd30244cef54c7110988f4b81caeec4b4a83ae"
+  },
+  {
+    "source": "0083.mp3",
+    "filename": "pilih-singki.mp3",
+    "text": "Pilih singki.",
+    "sha256": "610b0dcea7c7493084c9df58429e8cc49c778a30b1796c58e51b6544016ff14c"
+  },
+  {
+    "source": "0084.mp3",
+    "filename": "paip.mp3",
+    "text": "paip.",
+    "sha256": "6376a5bd32a8c22f985988656a17aa01075d690893a7eeb2060274dd63837006"
+  },
+  {
+    "source": "0085.mp3",
+    "filename": "pilih-paip.mp3",
+    "text": "Pilih paip.",
+    "sha256": "ab56f554deb7e520441670be0c233606cec97b83b8b613a154cf9af8d7add8f4"
+  },
+  {
+    "source": "0086.mp3",
+    "filename": "tandas.mp3",
+    "text": "tandas.",
+    "sha256": "1ecfa55b107669214d97e015f64603bc2de0f3f81bfba5cd95cd1e7dee9e18f9"
+  },
+  {
+    "source": "0087.mp3",
+    "filename": "pilih-tandas.mp3",
+    "text": "Pilih tandas.",
+    "sha256": "144cdf9ec0ffd7e0d11a89e0491800c0e69d28c35dc2db6ea218863db4b5499b"
+  },
+  {
+    "source": "0088.mp3",
+    "filename": "penyapu.mp3",
+    "text": "penyapu.",
+    "sha256": "f625fb3bb2c0bf8d4c4a8983d94547454fcc356507bab8d24c1ceac4116d22c5"
+  },
+  {
+    "source": "0089.mp3",
+    "filename": "pilih-penyapu.mp3",
+    "text": "Pilih penyapu.",
+    "sha256": "341bf4e9df903cfa14d273b0548034f144543546f0c0b60f8341f20ac0b072c3"
+  },
+  {
+    "source": "0090.mp3",
+    "filename": "sampah.mp3",
+    "text": "sampah.",
+    "sha256": "2d0f665e4cd877a8ef703710b4912975ee359f854524da5baa582127b5c72fa3"
+  },
+  {
+    "source": "0091.mp3",
+    "filename": "pilih-sampah.mp3",
+    "text": "Pilih sampah.",
+    "sha256": "44d99f5acf2c178984eee20856abfddf8b2a36e4d444831a91a92fcc3a6637c3"
+  },
+  {
+    "source": "0092.mp3",
+    "filename": "habuk.mp3",
+    "text": "habuk.",
+    "sha256": "905de4799152df969ba4e7264893f6932dda051aac4f99f02cca6e0b3a523038"
+  },
+  {
+    "source": "0093.mp3",
+    "filename": "pilih-habuk.mp3",
+    "text": "Pilih habuk.",
+    "sha256": "c89d25776f17d23505d52f12ed594bd144a6fa26dee9f4d24f52dfa5a584a4e5"
+  },
+  {
+    "source": "0094.mp3",
+    "filename": "baju.mp3",
+    "text": "baju.",
+    "sha256": "0296d6132778447951f7411930601631cc3f0fc43dbd72a847ebdbee502074de"
+  },
+  {
+    "source": "0095.mp3",
+    "filename": "pilih-baju.mp3",
+    "text": "Pilih baju.",
+    "sha256": "f9b3fcb7c4ca30261ff70c03b58cebf0394ecf4251e04b5a9fa3a60e9ed1beaa"
+  },
+  {
+    "source": "0096.mp3",
+    "filename": "seluar.mp3",
+    "text": "seluar.",
+    "sha256": "7f1d81bface176dc058dff9149df8c6d3af2857c12e9ea104986ee4f03896234"
+  },
+  {
+    "source": "0097.mp3",
+    "filename": "pilih-seluar.mp3",
+    "text": "Pilih seluar.",
+    "sha256": "c5f96af065d6cb0d8a292bac97b16de0094056e8a309f11e90869228b3479146"
+  },
+  {
+    "source": "0098.mp3",
+    "filename": "makan.mp3",
+    "text": "makan.",
+    "sha256": "7cdf88322f65a1d330df1dd11d4e42cc795309d11c2fa10d8714a6d009705b15"
+  },
+  {
+    "source": "0099.mp3",
+    "filename": "pilih-makan.mp3",
+    "text": "Pilih makan.",
+    "sha256": "128e028a5fe44878ff8dd97e9930c20d2dc65901594a3ce099b65e0569e7c4e2"
+  },
+  {
+    "source": "0100.mp3",
+    "filename": "minum.mp3",
+    "text": "minum.",
+    "sha256": "b85141c8f0e5dc1be9d84ceeea8d670429edf45c5466dbab2334d6bcec3c1f26"
+  },
+  {
+    "source": "0101.mp3",
+    "filename": "pilih-minum.mp3",
+    "text": "Pilih minum.",
+    "sha256": "390521a3c8306d06a587bb20139676ddbbe0b50b49837a5d104959aa3ceaf799"
+  },
+  {
+    "source": "0102.mp3",
+    "filename": "tidur.mp3",
+    "text": "tidur.",
+    "sha256": "2363e4f663af56d91e4c0bdd8a9a17ed0ac66643c15bfeb0b2c8b527f93f4ae9"
+  },
+  {
+    "source": "0103.mp3",
+    "filename": "pilih-tidur.mp3",
+    "text": "Pilih tidur.",
+    "sha256": "8dc3ddb76e9c7a788f68feefdb5b11599d44aac1d2ef9003e6205cc6ec1f0623"
+  },
+  {
+    "source": "0104.mp3",
+    "filename": "mandi.mp3",
+    "text": "mandi.",
+    "sha256": "5c441c75f6fe9f20a8fef344c34c7f5b8cb699496896db33231aab2c161094d1"
+  },
+  {
+    "source": "0105.mp3",
+    "filename": "pilih-mandi.mp3",
+    "text": "Pilih mandi.",
+    "sha256": "8c53697123aec1d9f9f50a057d0ed3722afa37b76e60e46c791688cdc9d19785"
+  },
+  {
+    "source": "0106.mp3",
+    "filename": "duduk.mp3",
+    "text": "duduk.",
+    "sha256": "f248750e385fafd93a3701d79c184438561290c0a4ff22a3384c54993e21983f"
+  },
+  {
+    "source": "0107.mp3",
+    "filename": "pilih-duduk.mp3",
+    "text": "Pilih duduk.",
+    "sha256": "ad4940bd1e84c820ba3c1c5a0e6febfd036fd5035097275e511b3316ac5da00d"
+  },
+  {
+    "source": "0108.mp3",
+    "filename": "baca.mp3",
+    "text": "baca.",
+    "sha256": "3bf1ee2f18026a0c9baa186db2ff23612e35bc0db36c6031cb1e67410d914eb1"
+  },
+  {
+    "source": "0109.mp3",
+    "filename": "pilih-baca.mp3",
+    "text": "Pilih baca.",
+    "sha256": "d494f98e865d949f6b3e70fbd1c5e2e7a86143d25538ce73b6f04832e34b4885"
+  },
+  {
+    "source": "0110.mp3",
+    "filename": "tulis.mp3",
+    "text": "tulis.",
+    "sha256": "a254b4470197b914c332cdf9e813f3e09340a66700cc7e454c6bcec8ae35e11f"
+  },
+  {
+    "source": "0111.mp3",
+    "filename": "pilih-tulis.mp3",
+    "text": "Pilih tulis.",
+    "sha256": "abac14198ce370578140bee694aeaa82067f2f670eeb5f39617eae125056e8aa"
+  },
+  {
+    "source": "0112.mp3",
+    "filename": "buka.mp3",
+    "text": "buka.",
+    "sha256": "696f8bcd38e4d9d41ec523d8dd576231e86d589b52d3aa69255e4059ca5c5a16"
+  },
+  {
+    "source": "0113.mp3",
+    "filename": "pilih-buka.mp3",
+    "text": "Pilih buka.",
+    "sha256": "accd49d5035cd3ef1494c7454202239163eada835193b94290e9eb4020b883b8"
+  },
+  {
+    "source": "0114.mp3",
+    "filename": "tutup.mp3",
+    "text": "tutup.",
+    "sha256": "10853091cf72a715e4b6e755f5a11068692b95ce8d7b43a225f97c55d4f3ed0d"
+  },
+  {
+    "source": "0115.mp3",
+    "filename": "pilih-tutup.mp3",
+    "text": "Pilih tutup.",
+    "sha256": "900e291161cad1daf2b877600dc2b9e4684b512d228a9ec22f5e30ed0141be5b"
+  },
+  {
+    "source": "0116.mp3",
+    "filename": "lari.mp3",
+    "text": "lari.",
+    "sha256": "9082315be455d4d6ec9103df514692f2fdf0ec36764f912d052a864f486799a6"
+  },
+  {
+    "source": "0117.mp3",
+    "filename": "pilih-lari.mp3",
+    "text": "Pilih lari.",
+    "sha256": "7021d79029df328949927f83248c2f668ea3db6eabecb300d12d1c8b1f4f07a6"
+  },
+  {
+    "source": "0118.mp3",
+    "filename": "masak.mp3",
+    "text": "masak.",
+    "sha256": "c4e82b041e0bd26df7e43d4ca055a78db6a679d3509afc0d24834a4319363522"
+  },
+  {
+    "source": "0119.mp3",
+    "filename": "pilih-masak.mp3",
+    "text": "Pilih masak.",
+    "sha256": "2af833061ef10e18f4cd0baae0f9af5be958a06aabddd5e16fd035c4aee2ef3b"
+  },
+  {
+    "source": "0120.mp3",
+    "filename": "basuh.mp3",
+    "text": "basuh.",
+    "sha256": "8872233dc872e6e8332d329226749440d228ae8304d729529bf3f5dbc1bc88d1"
+  },
+  {
+    "source": "0121.mp3",
+    "filename": "pilih-basuh.mp3",
+    "text": "Pilih basuh.",
+    "sha256": "7a48f23dd50c2864b546dc09012e575428c787a2d2237215527339e3ed39b351"
+  },
+  {
+    "source": "0122.mp3",
+    "filename": "sapu.mp3",
+    "text": "sapu.",
+    "sha256": "3a4142b6f1def4c5bcfd417fe38653e883461ce74effde9a10b4d4adecd08a3c"
+  },
+  {
+    "source": "0123.mp3",
+    "filename": "pilih-sapu.mp3",
+    "text": "Pilih sapu.",
+    "sha256": "a1d7343435d424ac31edcf6040f31b8b8392414a3fccc4390e9834fe91f18196"
+  },
+  {
+    "source": "0124.mp3",
+    "filename": "lap.mp3",
+    "text": "lap.",
+    "sha256": "fec582a4c3a6317272d808507446a9506342f2e9b6d5733a6ebff2dffc64f3fd"
+  },
+  {
+    "source": "0125.mp3",
+    "filename": "pilih-lap.mp3",
+    "text": "Pilih lap.",
+    "sha256": "8f6f2a4fe722f958cfa7f53adc507c34fbe28b3d30ff1d620e0f6bdb11338c37"
+  },
+  {
+    "source": "0126.mp3",
+    "filename": "siram.mp3",
+    "text": "siram.",
+    "sha256": "c62e564362524c5353356c99b3111bbe2ac672812f6b97ab3ce6f4704513545d"
+  },
+  {
+    "source": "0127.mp3",
+    "filename": "pilih-siram.mp3",
+    "text": "Pilih siram.",
+    "sha256": "719a9c6a2e3f1caef1201000a66d2e7e83415a6726d140688488e650179c2663"
+  },
+  {
+    "source": "0128.mp3",
+    "filename": "angkat.mp3",
+    "text": "angkat.",
+    "sha256": "a7f549ad6a6398dd9dc45426d99f2b0686ece1a7ea43bc906127f4d6d8c3472a"
+  },
+  {
+    "source": "0129.mp3",
+    "filename": "pilih-angkat.mp3",
+    "text": "Pilih angkat.",
+    "sha256": "d0a689986a670646b197bba36b2049ab869f3bba40f06c759995108d5b25d483"
+  },
+  {
+    "source": "0130.mp3",
+    "filename": "lompat.mp3",
+    "text": "lompat.",
+    "sha256": "f3400dd60082af9a99f888a84699e118f7f452a39feaffd5862bcd74c683c578"
+  },
+  {
+    "source": "0131.mp3",
+    "filename": "pilih-lompat.mp3",
+    "text": "Pilih lompat.",
+    "sha256": "6b2137097ab4b99296f5153e7ca123a5f211d8cf16783c508229f46777a2db04"
+  },
+  {
+    "source": "0132.mp3",
+    "filename": "menari.mp3",
+    "text": "menari.",
+    "sha256": "139f929d0a19e28eb6fb82e4073fbd8ad8782fe229105cc81fc39420fbd6aee8"
+  },
+  {
+    "source": "0133.mp3",
+    "filename": "pilih-menari.mp3",
+    "text": "Pilih menari.",
+    "sha256": "687f418f61511c124e84b126ef2fbcdfec00a83127578b36c52b5774522bb60f"
+  },
+  {
+    "source": "0134.mp3",
+    "filename": "menyanyi.mp3",
+    "text": "menyanyi.",
+    "sha256": "fdf7a6c37df63b910a4ae20f0e5c203f49a07c5ec3718048b85d0ef493906f34"
+  },
+  {
+    "source": "0135.mp3",
+    "filename": "pilih-menyanyi.mp3",
+    "text": "Pilih menyanyi.",
+    "sha256": "0e16a9da395d066f0371f9284669c90c9bfd722b6bfc632241d035176939c37b"
+  },
+  {
+    "source": "0136.mp3",
+    "filename": "berjalan.mp3",
+    "text": "berjalan.",
+    "sha256": "5d4b92c5fa082632c69dbd842754e1a02d85b41b244fc7137f3593b4ba05f216"
+  },
+  {
+    "source": "0137.mp3",
+    "filename": "pilih-berjalan.mp3",
+    "text": "Pilih berjalan.",
+    "sha256": "c9cbe74a1afd982844dcd717f7a1ac82cb427be98a89afa6b3dd8b90043636de"
+  }
+]

@@ -1,4 +1,4 @@
-import {cards, rounds, makeChoices} from './data.js';
+import {cards, rounds, makeChoices, questionAudio} from './data.js';
 import {line, makePuzzle} from './puzzle.js';
 
 const app = document.querySelector('#app');
@@ -182,6 +182,7 @@ function startCard() {
   puzzle = null;
   if (activity === 'name') {
     renderName();
+    if (theme === 'Aktiviti/Perbuatan') playAudio(questionAudio);
   } else {
     choices = makeChoices(card.word, choiceCount, index * 3 + round);
     renderChoice();
@@ -210,7 +211,7 @@ function answer() {
 function renderName() {
   if (phase === 'photo') {
     show(`<section class="intro-layout"><figure class="picture intro-photo">${photo(card)}</figure>
-      <div>${cardHeading(theme === 'Aktiviti/Perbuatan' ? 'Apakah yang sedang dilakukan?' : 'Apa ini?')}<div class="actions">${buttons('puzzle', 'Jawapan', 'primary')}</div></div></section>`);
+      <div>${cardHeading(theme === 'Aktiviti/Perbuatan' ? 'Apakah yang sedang dilakukan?' : 'Apa ini?')}<div class="actions">${theme === 'Aktiviti/Perbuatan' ? buttons('question-audio', 'Dengar Soalan', 'secondary') : ''}${buttons('puzzle', 'Jawapan', 'primary')}</div><p class="audio-status" id="audio-status" role="status"></p></div></section>`);
     return;
   }
 
@@ -465,6 +466,7 @@ const actions = {
     else choose('', true);
   },
   pick: choose,
+  'question-audio'() { playAudio(questionAudio); },
   'word-audio'() { playAudio(card.wordAudio); },
   'prompt-audio'() { playAudio(activity === 'words' || promptMode === 'read' ? card.wordAudio : card.promptAudio); },
 };
