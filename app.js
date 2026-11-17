@@ -210,7 +210,7 @@ function answer() {
 function renderName() {
   if (phase === 'photo') {
     show(`<section class="intro-layout"><figure class="picture intro-photo">${photo(card)}</figure>
-      <div>${cardHeading(theme === 'Aktiviti/Perbuatan' ? 'Apa yang dilakukan?' : 'Apa ini?')}<div class="actions">${buttons('puzzle', 'Jawapan', 'primary')}</div></div></section>`);
+      <div>${cardHeading(theme === 'Aktiviti/Perbuatan' ? 'Apakah yang sedang dilakukan?' : 'Apa ini?')}<div class="actions">${buttons('puzzle', 'Jawapan', 'primary')}</div></div></section>`);
     return;
   }
 
