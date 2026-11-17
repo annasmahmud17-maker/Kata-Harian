@@ -35,7 +35,7 @@ def enter(page, activity, theme="Dapur", round_number=1, count=2, read=False):
         expect(page.locator(".guide [lang=en]").first).to_be_visible()
         button(page, "Mula / Start").click()
     button(page, theme).click()
-    button(page, f"Pusingan {round_number} · 5 kad").click()
+    button(page, f"Tahap {round_number} · 5 kad").click()
     if activity != "Sebut Nama":
         page.get_by_role("radio", name=str(count), exact=True).check()
         if read:

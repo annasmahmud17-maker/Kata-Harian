@@ -1,4 +1,4 @@
-import {cards, rounds} from './data.js';
+import {cards, rounds, makeChoices} from './data.js';
 import {line, makePuzzle} from './puzzle.js';
 
 const app = document.querySelector('#app');
@@ -108,6 +108,10 @@ function show(markup) {
 }
 
 function photo(item, label = 'Gambar objek') {
+  if (item.tile) {
+    const [cols, rows, x, y] = item.tile;
+    return `<span class="object-photo atlas-photo"><span class="atlas-window"><img data-media src="${item.image}" alt="${label}" style="width:${cols * 100}%;height:${rows * 100}%;left:${-x * 100}%;top:${-y * 100}%"><span class="media-error" hidden>Gambar belum tersedia. Sambung ke internet dan cuba lagi.</span></span></span>`;
+  }
   return `<img class="object-photo" data-media src="${item.image}" alt="${label}"><span class="media-error" hidden>Gambar belum tersedia. Sambung ke internet dan cuba lagi.</span>`;
 }
 
@@ -133,15 +137,15 @@ function home() {
 
 function themes() {
   screen = 'themes';
-  show(`${heading('Pilih tema', activityNames[activity])}<div class="menu">${Object.keys(rounds).map(value =>
+  show(`${heading('Pilih kategori', activityNames[activity])}<div class="menu">${Object.keys(rounds).map(value =>
     buttons('theme', value, 'secondary', `data-value="${value}"`)).join('')}</div>`);
 }
 
 function roundMenu() {
   screen = 'rounds';
-  show(`${heading('Pilih pusingan', `${activityNames[activity]} · ${theme}`)}
-  <div class="menu">${rounds[theme].map((_, i) => buttons('round', `Pusingan ${i + 1} · 5 kad`, 'secondary', `data-value="${i}"`)).join('')}</div>
-  ${buttons('themes', 'Tukar tema', 'quiet')}`);
+  show(`${heading('Pilih tahap', `${activityNames[activity]} · ${theme}`)}
+  <div class="menu">${rounds[theme].map((_, i) => buttons('round', `Tahap ${i + 1} · 5 kad`, 'secondary', `data-value="${i}"`)).join('')}</div>
+  ${buttons('themes', 'Tukar kategori', 'quiet')}`);
 }
 
 function setup() {
@@ -179,11 +183,7 @@ function startCard() {
   if (activity === 'name') {
     renderName();
   } else {
-    const otherThemes = Object.entries(rounds).filter(([name]) => name !== theme).flatMap(([, sets]) => sets.flat());
-    const offset = (index * 3 + round) % otherThemes.length;
-    const pool = [...otherThemes.slice(offset), ...otherThemes.slice(0, offset)];
-    choices = pool.slice(0, choiceCount - 1);
-    choices.splice((index + round) % choiceCount, 0, card.word);
+    choices = makeChoices(card.word, choiceCount, index * 3 + round);
     renderChoice();
     if (activity === 'words' || promptMode === 'listen') actions['prompt-audio']();
   }
@@ -210,7 +210,7 @@ function answer() {
 function renderName() {
   if (phase === 'photo') {
     show(`<section class="intro-layout"><figure class="picture intro-photo">${photo(card)}</figure>
-      <div>${cardHeading('Apa ini?')}<div class="actions">${buttons('puzzle', 'Jawapan', 'primary')}</div></div></section>`);
+      <div>${cardHeading(theme === 'Aktiviti/Perbuatan' ? 'Apa yang dilakukan?' : 'Apa ini?')}<div class="actions">${buttons('puzzle', 'Jawapan', 'primary')}</div></div></section>`);
     return;
   }
 
@@ -456,6 +456,7 @@ const actions = {
   },
   aid() {
     aid = true;
+    document.querySelector('#aid').innerHTML = syllableWord();
     document.querySelector('#aid').hidden = false;
     message('Padankan huruf dengan perkataan yang ditunjukkan.');
   },

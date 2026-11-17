@@ -53,7 +53,7 @@ test('service worker precaches scoped assets, removes obsolete caches, and serve
   await lifecycle('install');
   await lifecycle('activate');
   assert(claimed);
-  assert.deepEqual([...stores.keys()], ['unrelated-cache', `kata-harian:${scope}:v15`]);
+  assert.deepEqual([...stores.keys()], ['unrelated-cache', `kata-harian:${scope}:v17`]);
 
   online = false;
   const get = (path, options = {}) => new Promise(resolve => events.get('fetch')({
@@ -61,7 +61,10 @@ test('service worker precaches scoped assets, removes obsolete caches, and serve
     respondWith: resolve,
   }));
   assert.match(await (await get('./', {mode: 'navigate'})).text(), /Kata Harian/);
-  for (const image of mediaFiles) assert.equal((await get(image)).status, 200);
+  for (const image of mediaFiles) {
+    assert.equal((await get(image)).status, 200);
+    await readFile(new URL(image, new URL('../', import.meta.url)));
+  }
   const audio = await get(asset, {headers: {Range: 'bytes=0-3'}});
   assert.equal(audio.status, 206);
   assert.equal(audio.headers.get('Content-Range'), 'bytes 0-3/10');

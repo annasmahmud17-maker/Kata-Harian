@@ -1,6 +1,6 @@
 # Kata Harian
 
-Bahan latihan perkataan harian dalam bahasa Melayu. Versi demo ini disediakan untuk mencuba dua aktiviti bersama pendamping. Kedua-duanya menggunakan bank rintis yang sama, dengan 30 perkataan dalam tema Dapur, Rumah dan Pasar.
+Bahan latihan perkataan harian dalam bahasa Melayu. Tiga aktiviti bersama pendamping menggunakan bank v2.0: 100 kad (98 perkataan unik), lima kategori dan empat tahap bagi setiap kategori. Setiap tahap mengandungi lima kad. Pasar kini dinamakan Makanan & Minuman. Rakaman asal 30 perkataan dikekalkan; 68 perkataan baharu menunggu rakaman.
 
 ## Cuba pada komputer
 
@@ -32,7 +32,7 @@ Buka [http://127.0.0.1:8000/kata-harian/](http://127.0.0.1:8000/kata-harian/). P
 - Lihat [MEDIA.md](MEDIA.md) untuk senarai gambar dan rakaman mengikut kad.
 - Isi medan `wordAudio` dan `promptAudio` dalam `data.js` dengan laluan relatif fail yang sudah dimasukkan. Service worker mengambil senarai media daripada fail ini.
 - Setiap kali fail aplikasi atau aset berubah, naikkan versi `cacheName` dalam `sw.js`. Tutup tab atau tetingkap aplikasi lama supaya service worker baharu dapat diaktifkan. Cache versi lama bagi skop ini akan dipadamkan semasa pengaktifan.
-- Untuk tambah kad, kekalkan ejaan standard, isi suku kata yang bercantum tepat dengan ejaan, dan pilih gambar pengalih yang mudah dibezakan. Petak menyokong perkataan 2–8 huruf dan paparan jawapan menyokong dua atau tiga suku kata. Rujuk [PRPM Dewan Bahasa dan Pustaka](https://prpm.dbp.gov.my/).
+- Untuk tambah kad, kekalkan ejaan standard, isi suku kata yang bercantum tepat dengan ejaan, dan pilih gambar pengalih yang mudah dibezakan. Petak menyokong perkataan 2–8 huruf dan paparan jawapan menyokong satu hingga tiga suku kata. Rujuk [PRPM Dewan Bahasa dan Pustaka](https://prpm.dbp.gov.my/).
 
 ## Ujian
 

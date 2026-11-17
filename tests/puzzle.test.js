@@ -1,27 +1,33 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {cards, rounds} from '../data.js';
+import {cards, rounds, makeChoices} from '../data.js';
 import {line, makePuzzle, occurrences} from '../puzzle.js';
 
-const bankRows = readFileSync(new URL('./bank-source.md', import.meta.url), 'utf8')
-  .split('\n').filter(row => /^\| (Dapur|Rumah|Pasar) \|/.test(row));
-const approved = {};
-for (const row of bankRows) {
-  const [theme, round, ...words] = row.split('|').slice(1, -1).map(part => part.trim());
-  approved[theme] ??= [];
-  approved[theme][Number(round) - 1] = words;
-}
+const approved = {
+  Dapur: ['sudu garpu pisau cawan teko', 'gelas senduk pinggan beras lesung', 'mangkuk periuk kuali cerek dulang', 'sudip penapis arang api minyak'],
+  Rumah: ['meja sofa tingkap pintu lampu', 'langsir bantal kipas katil tikar', 'jam kunci cermin payung bakul', 'kerusi almari laci radio telefon'],
+  'Makanan & Minuman': ['ikan ayam telur pisang timun', 'sotong udang kubis terung nanas', 'nasi roti susu kopi teh', 'biskut kentang betik kelapa durian'],
+  Kebersihan: ['sabun syampu tuala sikat berus', 'baldi mop kain span tisu', 'singki paip tandas bakul cermin', 'penyapu sampah habuk baju seluar'],
+  'Aktiviti/Perbuatan': ['makan minum tidur mandi duduk', 'baca tulis buka tutup lari', 'masak basuh sapu lap siram', 'angkat lompat menari menyanyi berjalan'],
+};
 
-test('approved bank order, spelling, syllables and distractors', () => {
-  assert.deepEqual(rounds, approved);
-  assert.equal(Object.keys(cards).length, 30);
+test('v2 approved bank order and spelling, syllables and retained recordings', () => {
+  assert.deepEqual(rounds, Object.fromEntries(Object.entries(approved).map(([k, v]) => [k, v.map(row => row.split(' '))])));
+  assert.equal(Object.values(rounds).flat(2).length, 100);
+  assert.equal(Object.keys(cards).length, 98);
+  assert.equal(Object.values(cards).filter(card => card.wordAudio && card.promptAudio).length, 30);
   for (const [word, card] of Object.entries(cards)) {
     assert.equal(card.word, word);
     assert.equal(card.syllables.join(''), word);
-    assert.equal(card.syllables.length, 2);
+    assert(card.syllables.length >= 1 && card.syllables.length <= 3);
     assert.match(word, /^[a-z]{2,8}$/);
-    assert(card.distractors.every(other => other !== word && cards[other]));
+    for (const count of [2, 4, 6]) for (let offset = 0; offset < 20; offset++) {
+      const options = makeChoices(word, count, offset);
+      assert.equal(options.length, count);
+      assert.equal(new Set(options).size, count);
+      assert.equal(options.filter(x => x === word).length, 1);
+    }
   }
 });
 

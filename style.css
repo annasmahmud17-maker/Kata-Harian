@@ -246,3 +246,9 @@ footer:has(#offline[hidden]) { display: none; }
 }
 
 .button > [lang="en"] { margin-inline-start: .28em; }
+
+/* Each atlas cell stays square even in short landscape choice cards. */
+.atlas-photo { display: flex; align-items: center; justify-content: center; overflow: hidden; container-type: size; }
+.atlas-window { display: block; position: relative; flex: none; width: min(100cqw, 100cqh); height: min(100cqw, 100cqh); aspect-ratio: 1; overflow: hidden; }
+.atlas-window img { position: absolute; max-width: none; object-fit: fill; }
+
