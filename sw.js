@@ -1,9 +1,9 @@
 import {mediaFiles} from './data.js';
 
 const prefix = `kata-harian:${self.registration.scope}:`;
-const cacheName = prefix + 'v20';
+const cacheName = prefix + 'v21';
 const shell = [
-  './', './index.html', './style.css', './app.js', './data.js', './images.js', './puzzle.js', './app.webmanifest',
+  './', './index.html', './style.css', './app.js', './analytics.js', './data.js', './images.js', './puzzle.js', './app.webmanifest',
   './assets/icons/logo.webp', './assets/icons/kh-32.png', './assets/icons/kh-180.png',
   './assets/icons/kh-192.png', './assets/icons/kh-512.png', './assets/icons/kh-maskable.png',
 ];

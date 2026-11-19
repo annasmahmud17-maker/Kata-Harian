@@ -38,3 +38,9 @@ Buka [http://127.0.0.1:8000/kata-harian/](http://127.0.0.1:8000/kata-harian/). P
 
 - `npm test` menjalankan ujian susunan bank, suku kata, pengalih dan keunikan kedudukan perkataan serta simulasi cache luar talian menggunakan Node.js.
 - `python3 tests/browser.py` menjalankan pusingan lima kad dan ujian input sentuh, tetikus, papan kekunci, susun atur, cache gambar dan audio. Gunakan Python Playwright, Chromium serta FFmpeg. Tetapkan `CHROMIUM_PATH` jika Chromium dipasang pada laluan lain. Skrip menghasilkan nada MP3 sementara untuk menguji ulang main dan cache. Nada itu hanya digunakan dalam salinan ujian sementara.
+
+## Statistik penggunaan
+
+Statistik agregat dipaparkan dalam Website Insights peribadi pemilik. Skrip merekodkan lawatan dalam talian, jenis peranti, kategori/aktiviti yang dimulakan dan pusingan yang diselesaikan. Tiada nama, jawapan, markah atau maklumat kesihatan dihantar. ID sesi rawak dalam sessionStorage diset semula setiap hari dan berbeza bagi setiap laman; pelayan hanya menyimpan hash ID itu selama paling lama kira-kira 31 hari. Alamat IP tidak disimpan dalam pangkalan data aplikasi. Laluan halaman individu tidak disimpan, hanya awalan laman berdaftar.
+
+Tetapan Do Not Track / Global Privacy Control dihormati. Pengguna boleh mematikan statistik melalui Privasi di laman utama. Aplikasi terus berfungsi jika statistik disekat atau tiada internet. Statistik tidak meliputi penggunaan sebelum pemasangan penjejak.

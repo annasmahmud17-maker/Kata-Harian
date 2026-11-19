@@ -252,3 +252,10 @@ footer:has(#offline[hidden]) { display: none; }
 .atlas-window { display: block; position: relative; flex: none; width: min(100cqw, 100cqh); height: min(100cqw, 100cqh); aspect-ratio: 1; overflow: hidden; }
 .atlas-window img { position: absolute; max-width: none; object-fit: fill; }
 
+
+.privacy-note { max-width: 620px; margin: 24px auto 12px; padding: 12px 16px; color: #675d70; font-size: .9rem; line-height: 1.6; }
+.privacy-note summary { cursor: pointer; }
+.privacy-note p { margin: 10px 0; }
+.privacy-note [lang=en] { color: #76658d; }
+.privacy-note label { display: flex; align-items: center; gap: 10px; }
+.privacy-note input { width: 20px; height: 20px; }

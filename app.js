@@ -1,3 +1,4 @@
+import {trackUsage, analyticsAllowed, browserBlocksAnalytics, setAnalyticsOptOut} from './analytics.js';
 import {cards, rounds, makeChoices, questionAudio} from './data.js';
 import {line, makePuzzle} from './puzzle.js';
 
@@ -132,7 +133,13 @@ function home() {
   <div class="activity-list">
     ${Object.entries(activityNames).map(([key, title]) => `<button class="activity-card" data-action="mode" data-value="${key}"><span><strong>${title}</strong><small>${choiceLabels[key][0]}</small><small lang="en">${choiceLabels[key][1]}</small></span><span aria-hidden="true">›</span></button>`).join('')}
   </div>
-  <div id="install-area">${installed() ? '' : buttons('install', 'Pasang Aplikasi', 'quiet')}${!installed() ? '<div id="install-help" class="note" hidden></div>' : ''}</div>`);
+  <div id="install-area">${installed() ? '' : buttons('install', 'Pasang Aplikasi', 'quiet')}${!installed() ? '<div id="install-help" class="note" hidden></div>' : ''}</div>
+  <details class="privacy-note"><summary>Privasi / <span lang="en">Privacy</span></summary>
+    <p>Statistik tanpa nama membantu kami menambah baik aplikasi. Tiada nama, jawapan, markah atau maklumat kesihatan direkodkan.</p>
+    <p lang="en">Anonymous usage counts help us improve the app. Names, answers, scores and health information are not recorded.</p>
+    <label><input id="analytics-consent" type="checkbox" ${analyticsAllowed() ? 'checked' : ''} ${browserBlocksAnalytics() ? 'disabled' : ''}> Benarkan statistik tanpa nama</label>
+    <p lang="en">Allow anonymous usage statistics. Your browser’s privacy settings are respected.</p>
+  </details>`);
 }
 
 function themes() {
@@ -165,6 +172,7 @@ function setup() {
 }
 
 function startRound() {
+  trackUsage('activity_start', {activity: activityNames[activity], category: theme});
   deck = rounds[theme][round];
   index = 0;
   startCard();
@@ -268,6 +276,7 @@ function renderChoice() {
 }
 
 function finish() {
+  trackUsage('round_complete', {activity: activityNames[activity], category: theme});
   stopAudio();
   screen = 'end';
   show(`${heading('Pusingan selesai', `${activityNames[activity]} · ${theme}`)}
@@ -470,6 +479,10 @@ const actions = {
   'word-audio'() { playAudio(card.wordAudio); },
   'prompt-audio'() { playAudio(activity === 'words' || promptMode === 'read' ? card.wordAudio : card.promptAudio); },
 };
+
+app.addEventListener('change', event => {
+  if (event.target.id === 'analytics-consent') setAnalyticsOptOut(!event.target.checked);
+});
 
 app.addEventListener('submit', event => {
   if (event.target.id !== 'round-settings') return;
